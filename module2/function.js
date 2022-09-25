@@ -37,3 +37,13 @@ console.log(a(5, 3));
 (function(num1, num2){
     console.log(num1/num2);
 })(10, 5);
+
+//IIFE without parameter
+(function(){
+    console.log("Hello I am IIFE");
+})();
+
+//IIFE with parameters
+(function(num1,num2){
+    console.log(num1 + num2);
+})(5,10);
