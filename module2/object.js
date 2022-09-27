@@ -21,4 +21,18 @@ let captainAmerica = {
     console.log("captain America says hiii");
  }
 }
-console.log(captainAmerica);
+//whole key Access
+// console.log(captainAmerica);
+
+//Particular key Access
+console.log(captainAmerica.Name);
+console.log(captainAmerica.Age);
+console.log(captainAmerica.Friends);
+console.log(captainAmerica.Friends[1]);
+console.log(captainAmerica.Address);
+console.log(captainAmerica.Address.city);
+console.log(captainAmerica.sayHi());
+captainAmerica.sayHi();
+
+
+
