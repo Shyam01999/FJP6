@@ -34,5 +34,26 @@ console.log(captainAmerica.Address.city);
 console.log(captainAmerica.sayHi());
 captainAmerica.sayHi();
 
+//add new key in object
+console.log("Object before add a new key",captainAmerica);
+captainAmerica.Movie = ["Avengers","Endgame","civilwar"];
+console.log("Object After add a new key" ,captainAmerica);
+
+//delete a key in object
+delete captainAmerica.Movie;
+console.log(captainAmerica);
+
+//Update a key
+captainAmerica.Address.state = "New York";
+console.log(captainAmerica);
+
+//second method to access a key
+console.log(captainAmerica.Name);
+console.log(captainAmerica["Name"]);
+console.log(captainAmerica['Address']['city']);
+
+
+
+
 
 
