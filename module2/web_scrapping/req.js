@@ -1,5 +1,6 @@
 const request = require('request');
-request('http://www.google.com', cb )
+
+request('http://www.google.com', cb );
 
 function cb(error, response, body) {
     if(error)
