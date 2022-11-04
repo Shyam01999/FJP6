@@ -1,0 +1,49 @@
+const request = require('request');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+const link = "https://www.espncricinfo.com/series/ipl-2022-1249214/match-results";
+request(link, cb);
+
+function cb(error, response, html ){
+    if(error){
+        console.error('error:', error); // Print the error if one occurred
+    }
+    else{
+         const dom = new JSDOM(html);
+         const document = dom.window.document;
+         let allScorecardTags = document.querySelectorAll('.ds-border-b.ds-border-line');
+         //console.log(allScorecardTags.length);
+         for(let i=0; i <60; i++){
+            let anchorTagAll = allScorecardTags[i].querySelectorAll("a");
+            let link = anchorTagAll[2].href;
+            let completeLink = "https://www.espncricinfo.com"+link;
+            //console.log(completeLink);
+            request(completeLink, cb2);
+            counter++;
+         }
+        
+    }
+}
+
+function cb2(error, response, html){
+    if(error){
+        console.log(error);
+    }
+    else{
+        const dom = new JSDOM(html);
+        const document = dom.window.document;
+        let batsmenRow = document.querySelectorAll('tbody [class="ds-border-b ds-border-line ds-text-tight-s"]');
+        for(let i=0; i<batsmenRow.length; i++){
+            let cells = batsmenRow[i].querySelectorAll("td");
+            if (cells.length == 8) {
+                let name = cells[0].textContent;
+                let runs = cells[2].textContent;
+                let balls = cells[3].textContent;
+                let fours = cells[5].textContent;
+                let sixes = cells[6].textContent;
+                // console.log("Name : ",name,"Runs : ",runs,"Balls : ",balls,"Fours : ",fours,"Sixes : ",sixes);
+        }
+    }
+}
+}
