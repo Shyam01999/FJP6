@@ -1,4 +1,5 @@
 let fs = require("fs");
+// const { arrayBuffer } = require("stream/consumers");
 
 let inputArr = process.argv.slice(2);
 //console.log(inputArr);
@@ -19,6 +20,21 @@ for(let i=0; i<inputArr.length; i++){
 
 // console.log(optionArr);
 // console.log(fileArr)
+
+let bothBNpresent = optionArr.includes("-b")&&optionArr.includes("-n");
+
+if(bothBNpresent == true){
+    console.log("either b can given as input or n can be given");
+    return;
+}
+
+for(let i=0; i<fileArr.length; i++){
+    let isPresent = fs.existsSync(fileArr[i]);
+    if(isPresent == false){
+        console.log("Please input correct file name.");
+        return;
+    }
+}
 
 
 let content = "";
@@ -51,7 +67,7 @@ if(isNPresent == true){
         //console.log(count);
     }
 }
- console.log(buffer.join("\n"));
+//   console.log(buffer.join("\n"));
 
 let counter = 1;
 let isBPresent = optionArr.includes("-b");
@@ -63,7 +79,7 @@ if(isBPresent == true){
         }
     }
 }
-console.log(buffer.join("\n"));
+ console.log(buffer.join("\n"));
 
 
 
