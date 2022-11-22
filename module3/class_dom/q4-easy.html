@@ -22,12 +22,15 @@
     </ul>
     <script>
         //insertBefore
-     let liTag = document.createElement("li");
-     liTag.innerText= "7";
-     let allLi = document.querySelectorAll("li");
-     let relevantLi = allLi[6];
-     let parent = document.querySelector("ul");
-     parent.insertBefore(liTag,relevantLi);
+
+    let liTag = document.createElement("li");
+    liTag.innerText = "7";
+    let allLi = document.querySelectorAll("li");
+    let relevantLi = allLi[6];
+    // console.log(relevantLi);
+    let parent = document.querySelector('ul');
+    parent.insertBefore(liTag , relevantLi);
+    console.log(parent)
 
     </script>
 </body>
