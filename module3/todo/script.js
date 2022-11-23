@@ -8,6 +8,9 @@ input.addEventListener("keydown", function (e){
     if(key == "Enter"){
         let value = input.value;
         // console.log(value);
+        if(value.length == 0){
+            return
+        }
         input.value = ""
         let liTag = document.createElement("li");
         liTag.innerHTML = `<div>${value}</div>
