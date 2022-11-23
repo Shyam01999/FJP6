@@ -10,7 +10,16 @@ input.addEventListener("keydown", function (e){
         // console.log(value);
         input.value = ""
         let liTag = document.createElement("li");
-        liTag.innerText = value;
+        liTag.innerHTML = `<div>${value}</div>
+                           <div class="delete"><i class="fa fa-trash"></i></div>`;
         ulTag.appendChild(liTag);
+        handleDelete(liTag);
     }
 })
+
+function handleDelete(liTag){
+    let deleteDiv = liTag.querySelector(".delete");
+    deleteDiv.addEventListener("click", function(){
+        liTag.remove();
+    })
+}
