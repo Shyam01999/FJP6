@@ -188,8 +188,11 @@ body{
 }
 
 .toolbox-main-cont{
-    height: 100%;
+    height:42rem;
     background-color: #EFF5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .color{
@@ -224,3 +227,33 @@ background-color: #393E46;
   color: red;
   cursor: pointer;
 }
+
+.toolbox-left-cont{
+  /* height: 20rem;  */
+}
+
+.toolbox-righ-cont{
+  height: 20rem;
+  width: 10rem;
+  background-color: #F2DEBA;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;  
+}
+
+.toolbox-left-cont input{
+  height: 20rem;
+  width: 30rem;
+  background: #DEBACE;
+  font-size: 2rem;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+}
+
+.toolbox-righ-cont .color{
+  width: 5rem;
+  height: 2.75rem;
+}
+
