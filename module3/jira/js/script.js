@@ -9,6 +9,7 @@ let addModal = true;
 let color = ["lightpink","lightblue","lightgreen","lightblack"];
 let modalPriortyColor = color[color.length-1];
 let addBtnColor = true;
+var uid = new ShortUniqueId();
 
 
 addBtn.addEventListener("click", () => {
@@ -57,22 +58,25 @@ createTicket = (ticketColor,task)=>{
 let ticketCont = document.createElement("div");
 ticketCont.setAttribute("class","ticket-cont");
 ticketCont.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
-                 <div class="ticket-id">#edhjdk</div>
+                 <div class="ticket-id">#${uid()}</div>
                  <div class="task-area">${task}</div>
                  <div class="lock-unlock"><i class="icon-lock"></i></div>`
 mainCont.appendChild(ticketCont);
 
 //lock unlock handle 
 let lockunlockBtn = ticketCont.querySelector(".lock-unlock i");
+let taskArea = ticketCont.querySelector(".task-area");
 lockunlockBtn.addEventListener('click',()=>{
     console.log("clicked");
     if(lockunlockBtn.classList.contains("icon-lock")){
         lockunlockBtn.classList.remove("icon-lock");
         lockunlockBtn.classList.add("icon-unlocked");
+        taskArea.setAttribute("contentEditable", "true");
     }
     else{
         lockunlockBtn.classList.remove("icon-unlocked");
         lockunlockBtn.classList.add("icon-lock");
+        taskArea.setAttribute("contentEditable", "false");
     }
 })
 

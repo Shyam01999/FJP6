@@ -180,22 +180,27 @@ background-color:#F0EBE3;
 
 .ticket-color{
 height: 1rem;
-
 }
 
 .ticket-id{
 height: 1.5rem;
-background-color: red;
 padding: 5px;
+font-weight: bold;
+font-size: .9rem;
+color: #FA7070;
+
 }
 
 .task-area{
-height: calc(100%-1rem-1.5rem);
+height: 5.8rem;
 padding: 5px;
+font-size: 1.25rem;
+overflow: auto;
+outline: none;
+word-break: break-all;
 }
 
 .lock-unlock{
   font-size: 1.5rem;
-  margin-top: 4rem;
   margin-left: 13.5rem;
 }
