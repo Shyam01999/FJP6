@@ -58,8 +58,24 @@ let ticketCont = document.createElement("div");
 ticketCont.setAttribute("class","ticket-cont");
 ticketCont.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
                  <div class="ticket-id">#edhjdk</div>
-                 <div class="task-area">${task}</div>`
+                 <div class="task-area">${task}</div>
+                 <div class="lock-unlock"><i class="icon-lock"></i></div>`
 mainCont.appendChild(ticketCont);
+
+//lock unlock handle 
+let lockunlockBtn = ticketCont.querySelector(".lock-unlock i");
+lockunlockBtn.addEventListener('click',()=>{
+    console.log("clicked");
+    if(lockunlockBtn.classList.contains("icon-lock")){
+        lockunlockBtn.classList.remove("icon-lock");
+        lockunlockBtn.classList.add("icon-unlocked");
+    }
+    else{
+        lockunlockBtn.classList.remove("icon-unlocked");
+        lockunlockBtn.classList.add("icon-lock");
+    }
+})
+
 //handle delete
 ticketCont.addEventListener('click',()=>{
     if(!addBtnColor){
