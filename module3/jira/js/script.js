@@ -5,11 +5,70 @@ let mainCont = document.querySelector(".main-cont");
 let priortyColor = document.querySelectorAll(".priorty-color");
 let removeBtn = document.querySelector(".remove-btn");
 let ticket = document.querySelectorAll(".ticket-cont");
+let toolboxColor = document.querySelectorAll(".color");
 let addModal = true;
 let color = ["lightpink","lightblue","lightgreen","lightblack"];
 let modalPriortyColor = color[color.length-1];
 let addBtnColor = true;
 var uid = new ShortUniqueId();
+
+let ticketArr = [];
+// console.log(ticketArr);
+
+// for(let i=0; i<ticketArr.length; i++){
+//     let ticket = ticketArr[i];
+//     let color = ticket.color;
+//     let id = ticket.id;
+//     let task = ticket.task
+//     console.log(color);
+//     console.log(id);
+//     console.log(task)
+//     createTicket(color, id, task)
+// }
+
+for(let i=0; i<toolboxColor.length; i++){
+    toolboxColor[i].addEventListener('click',function(){
+        // console.log(toolboxColor[i]);
+        let currentToolboxColor = toolboxColor[i].classList[1];
+        // console.log(currentToolboxColor);
+        let filterArr = [];
+        for(let i=0; i<ticketArr.length; i++){
+            // console.log(ticketArr[i].color)
+            if(ticketArr[i].color == currentToolboxColor){
+                filterArr.push(ticketArr[i]);
+            }
+        }
+          console.log(filterArr);
+        let allticket = document.querySelectorAll(".ticket-cont");
+        for(let j=0; j<allticket.length;j++){
+            allticket[j].remove();
+        }
+
+        for(let i=0; i<filterArr.length; i++){
+            let ticket = filterArr[i]
+             let color = ticket.color;
+             let id = ticket.id;
+             let task = ticket.task;
+            createTicket(color,task,id)
+        }
+
+        toolboxColor[i].addEventListener("dblclick" ,function(){
+            let allticket = document.querySelectorAll(".ticket-cont");
+            for(let j=0; j<allticket.length; j++){
+                allticket[j].remove();
+            }
+
+            for(let i=0; i<ticketArr.length; i++){
+                let ticket = ticketArr[i];
+                let color = ticket.color;
+                let id = ticket.id;
+                let task = ticket.task
+                createTicket(color, id, task)
+            }
+        })
+
+    })
+}
 
 
 addBtn.addEventListener("click", () => {
@@ -40,7 +99,7 @@ for(let i=0; i<priortyColor.length; i++){
         }
         allPriortyColor.classList.add('active');
         modalPriortyColor = allPriortyColor.classList[1];
-        console.log(modalPriortyColor);
+        // console.log(modalPriortyColor);
     })
 }
 
@@ -54,11 +113,18 @@ modal.addEventListener("keydown",(e)=>{
     }
 })
 
-createTicket = (ticketColor,task)=>{
+createTicket = (ticketColor, task, ticketId)=>{
+
+let id ;
+if(ticketId == undefined){
+    id = uid();
+}else{
+    id = ticketId;
+}
 let ticketCont = document.createElement("div");
 ticketCont.setAttribute("class","ticket-cont");
 ticketCont.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
-                 <div class="ticket-id">#${uid()}</div>
+                 <div class="ticket-id">#${id}</div>
                  <div class="task-area">${task}</div>
                  <div class="lock-unlock"><i class="icon-lock"></i></div>`
 mainCont.appendChild(ticketCont);
@@ -103,6 +169,13 @@ let ticketBandColor = ticketCont.querySelector(".ticket-color");
     let nextTicketColor = color[nextTicketColorIdx];
     ticketBandColor.classList.remove(currentTicketColor);
     ticketBandColor.classList.add(nextTicketColor);
-
  })
+
+ //ticketArr
+ if(ticketId == undefined){
+    ticketArr.push({"color":ticketColor , "task":task ,id:"#"+id});
+      console.log(ticketArr);
+ }
+
 }
+
