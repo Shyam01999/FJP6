@@ -13,18 +13,17 @@ let addBtnColor = true;
 var uid = new ShortUniqueId();
 
 let ticketArr = [];
-// console.log(ticketArr);
 
-// for(let i=0; i<ticketArr.length; i++){
-//     let ticket = ticketArr[i];
-//     let color = ticket.color;
-//     let id = ticket.id;
-//     let task = ticket.task
-//     console.log(color);
-//     console.log(id);
-//     console.log(task)
-//     createTicket(color, id, task)
-// }
+if(localStorage.getItem("tickets")){
+  let str = localStorage.getItem("tickets");
+  let arr = JSON.parse(str);
+  ticketArr = arr;
+  for(let i=0; i<arr.length; i++){
+    let ticketObj = arr[i];
+    createTicket(ticketObj.color, ticketObj.task, ticketObj.id)
+
+  }
+} 
 
 for (let i = 0; i < toolboxColor.length; i++) {
   toolboxColor[i].addEventListener("click", function () {
@@ -109,7 +108,7 @@ modal.addEventListener("keydown", (e) => {
   }
 });
 
-createTicket = (ticketColor, task, ticketId,) => {
+  function createTicket (ticketColor, task, ticketId) {
   let id;
   if (ticketId == undefined) {
     id = uid();
@@ -141,6 +140,7 @@ createTicket = (ticketColor, task, ticketId,) => {
     //update ticket task area as well
     let ticketIdx = getTicketIdx(id);
     ticketArr[ticketIdx].task = taskArea.textContent;
+    updateLocalStorage();
   });
 
   //handle delete
@@ -150,6 +150,7 @@ createTicket = (ticketColor, task, ticketId,) => {
       //update UI
       let ticketIdx = getTicketIdx(id)
       ticketArr.splice(ticketIdx, 1);
+      updateLocalStorage();
     }
   });
 
@@ -172,12 +173,13 @@ createTicket = (ticketColor, task, ticketId,) => {
     //update ticket array as well
     let ticketIdx = getTicketIdx(id);
     ticketArr[ticketIdx].color = nextTicketColor;
+    updateLocalStorage();
   });
 
   //ticketArr
   if (ticketId == undefined) {
     ticketArr.push({ color: ticketColor, task: task ,id: id });
-    //   console.log(ticketArr);
+    updateLocalStorage();
   }
 };
 
@@ -187,4 +189,9 @@ function getTicketIdx(id){
       return i;
     }
   }
+}
+
+function updateLocalStorage(){
+  let stringifyArr = JSON.stringify(ticketArr);
+  localStorage.setItem("tickets",stringifyArr);
 }
