@@ -137,12 +137,19 @@ createTicket = (ticketColor, task, ticketId,) => {
       lockunlockBtn.classList.add("icon-lock");
       taskArea.setAttribute("contentEditable", "false");
     }
+
+    //update ticket task area as well
+    let ticketIdx = getTicketIdx(id);
+    ticketArr[ticketIdx].task = taskArea.textContent;
   });
 
   //handle delete
   ticketCont.addEventListener("click", () => {
     if (!addBtnColor) {
       ticketCont.remove();
+      //update UI
+      let ticketIdx = getTicketIdx(id)
+      ticketArr.splice(ticketIdx, 1);
     }
   });
 
@@ -163,13 +170,7 @@ createTicket = (ticketColor, task, ticketId,) => {
     ticketBandColor.classList.add(nextTicketColor);
 
     //update ticket array as well
-    let ticketIdx ;
-    for(let i=0; i<ticketArr.length; i++){
-      if(ticketArr[i].id == id){
-        ticketIdx = i;
-        break;
-      }
-    }
+    let ticketIdx = getTicketIdx(id);
     ticketArr[ticketIdx].color = nextTicketColor;
   });
 
@@ -179,3 +180,11 @@ createTicket = (ticketColor, task, ticketId,) => {
     //   console.log(ticketArr);
   }
 };
+
+function getTicketIdx(id){
+  for(let i=0; i<ticketArr.length; i++){
+    if(ticketArr[i].id == id){
+      return i;
+    }
+  }
+}
