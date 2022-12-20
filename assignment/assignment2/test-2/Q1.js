@@ -11,15 +11,16 @@ function f(arr) {
 
 console.log(arr);
 
-console.log(g(arr));
+console.log(d(arr));
 
 console.log(arr);
 
 //solution 
-function g(arr){
-    let nArr = [];
+
+function d(arr){
+    let newArr = [];
     for(x in arr){
-        nArr[x] = 0;
+        newArr[x] = 0;
     }
-    return nArr;
+    return newArr;
 }
