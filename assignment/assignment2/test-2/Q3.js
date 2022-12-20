@@ -4,17 +4,16 @@
 // f(x)(y)
 
 //solution
-function f(x,y){
-    if(y == undefined){
-       return function(y){
-           return y*x;
-       } 
-    }else{
-        return y*x;
+
+function func(x,y){
+ if(y == undefined){
+    return function(y){
+        return x *y;
     }
+ }else{
+    return x *y ;
+ }
 }
 
-console.log(f(5,4));
-console.log(f(5)(4));
-
-
+console.log(func(3,5));
+console.log(func(3)(5))
