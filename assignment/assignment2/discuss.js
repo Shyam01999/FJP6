@@ -31,14 +31,16 @@
 // innerFn();
 
 //------------------>map 
-// let arr = [1,2,3,4,5,6,7,8,9];
-// let newArr = arr.map(function(x){
-//     return 5*x;
+ let arr = [1,2,3,4,5,6,7,8,9];
+
+// let newArr = arr.map(function (x){
+//     return x * 4;
 // });
+
+// console.log(arr)
+
 // console.log(newArr);
 
-
-// console.log(arr);
 
 //------------------>filter
 
@@ -49,12 +51,15 @@
 // console.log(filteredArr);
 // console.log(arr);
 
-// let sum = arr.reduce(function(prev,ele){
-//     return prev+ele;
-// })
+// ---------------------->Reduce
 
-// console.log(sum);
+let sum = arr.reduce(function(prev,ele){
+    return prev + ele;
+})
 
+console.log(sum);
+
+console.log(arr);
 // implement map
 
 // function myMap(arr,cb){
