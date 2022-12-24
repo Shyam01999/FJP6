@@ -27,7 +27,7 @@
 // innerFn();
 
 //------------------>map
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // let newArr = arr.map(function (x){
 //     return x * 4;
@@ -107,11 +107,11 @@ let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // console.log(d);
 // //-----------------> setTimeout
 
-setTimeout(function(){
-  console.log("Hello");
-},3000);
+// setTimeout(function(){
+//   console.log("Hello");
+// },3000);
 
-console.log("World");
+// console.log("World");
 
 //--------------> setInterval
 
