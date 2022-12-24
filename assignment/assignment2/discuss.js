@@ -5,20 +5,16 @@
 //     console.log(a);
 // }
 
-
 // console.log("Before func call"+a);
 // func(a);
 // console.log("After func call"+a);
-
 
 // const a = [20,10,30];
 // // a.push(50);
 // a = [];
 // console.log(a);
 
-
-//Higher Order Function -> functions which accepts a function in parameter or returns a function;
-
+//Higher Order Function -> functions which accepts a function in parameter or returns a function ;
 
 // function func(){
 //     return function(){
@@ -30,8 +26,8 @@
 
 // innerFn();
 
-//------------------>map 
- let arr = [1,2,3,4,5,6,7,8,9];
+//------------------>map
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // let newArr = arr.map(function (x){
 //     return x * 4;
@@ -40,7 +36,6 @@
 // console.log(arr)
 
 // console.log(newArr);
-
 
 //------------------>filter
 
@@ -53,9 +48,9 @@
 
 // ---------------------->Reduce
 
-let sum = arr.reduce(function(prev,ele){
-    return prev + ele;
-})
+let sum = arr.reduce(function (prev, ele) {
+  return prev + ele;
+});
 
 console.log(sum);
 
@@ -73,7 +68,6 @@ console.log(arr);
 
 // let b = myMap(arr,function(x){return 5*x});
 // console.log(b);
-
 
 // implement filter
 
@@ -93,7 +87,6 @@ console.log(arr);
 // })
 // console.log(c);
 
-
 //-----------------> setTimeout
 
 // setTimeout(function(){
@@ -102,10 +95,7 @@ console.log(arr);
 
 // console.log("World");
 
-
-
 //--------------> setInterval
-
 
 // let intervalId = setInterval(function(){
 //     console.log("Hello Repeated Many Times");
@@ -114,7 +104,6 @@ console.log(arr);
 // setTimeout(function(){
 //     clearInterval(intervalId);
 // },10000);
-
 
 // setTimeout(function(){
 //     console.log("Will I ever run?");
