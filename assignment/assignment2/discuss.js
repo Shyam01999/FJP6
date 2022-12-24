@@ -48,30 +48,33 @@ let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // ---------------------->Reduce
 
-let sum = arr.reduce(function (prev, ele) {
-  return prev + ele;
-});
+// let sum = arr.reduce(function (prev, ele) {
+//   return prev + ele;
+// });
 
-console.log(sum);
+// console.log(sum);
 
-console.log(arr);
-// implement map
+// console.log(arr);
 
-// function myMap(arr,cb){
-//     let newArr = [];
-//     for(let i=0;i<arr.length;i++){
-//         let ele = arr[i];
-//         newArr.push(cb(ele));
-//     }
-//     return newArr;
+//---------------------------> implement map 
+
+// function myMap(arr, cb){
+//   let newArr = [];
+//   for(let i=0; i<arr.length; i++){
+//     let ele = arr[i];
+//     newArr.push(cb(ele));
+//   }
+//   return newArr;
 // }
 
-// let b = myMap(arr,function(x){return 5*x});
+// let b = myMap(arr, function(x){
+//   return x * 5;
+// })
+
 // console.log(b);
+//----------------------------------> implement filter
 
-// implement filter
-
-// function myFilter(arr,cb){
+// function myFilter(arr, cb){
 //     let newArr = [];
 //     for(let i=0;i<arr.length;i++){
 //         let ele = arr[i];
@@ -83,17 +86,32 @@ console.log(arr);
 // }
 
 // let c = myFilter(arr,function(x){
-//     return x%2 == 1;
+//     return x%2 === 1;
 // })
 // console.log(c);
 
-//-----------------> setTimeout
+// ------------------------->Implement reduce
+// function myReduce(arr,cb){
+//   let newArr = [];
+//   for(let i=0; i<arr.length; i++){
+//     let ele = arr[i];
+//     newArr.push(cb(ele))
+//   }
+//   return newArr;
+// }
 
-// setTimeout(function(){
-//     console.log("Hello");
-// },5000)
+// let d = myReduce(arr,function cb(prev, ele){
+//   return prev+ele;
+// })
 
-// console.log("World");
+// console.log(d);
+// //-----------------> setTimeout
+
+setTimeout(function(){
+  console.log("Hello");
+},3000);
+
+console.log("World");
 
 //--------------> setInterval
 
