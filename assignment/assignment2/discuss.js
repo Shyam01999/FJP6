@@ -46,7 +46,7 @@
 // console.log(filteredArr);
 // console.log(arr);
 
-// ---------------------->Reduce
+// ----------------->Reduce
 
 // let sum = arr.reduce(function (prev, ele) {
 //   return prev + ele;
