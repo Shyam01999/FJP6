@@ -34,3 +34,54 @@ border: 0.2px solid;
 height: 30px;
 width: 100px;
 }
+
+.top-left-cell{
+border-right: 0.1px solid;
+border-bottom: 0.1px solid;
+background-color: gray;
+position: absolute;
+width: 30px;
+height: 30px;
+
+}
+
+.top-row{
+display: flex;
+position: absolute;
+left: 30px;
+}
+
+.top-row-cell{
+background-color: gray;
+width: 100px;
+height: 30px;
+border-left: 0.1px solid;
+border-bottom: 0.1px solid;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.left-col{
+    background-color: gray;
+position: absolute;
+left: 0;
+top: 90px;
+}
+
+.left-col-cell{
+    
+    width: 30px;
+    height: 30px;
+    border-bottom: 0.1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell{
+position: absolute;
+left: 30px;
+top: 90px;
+}
