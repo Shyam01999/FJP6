@@ -17,12 +17,12 @@ function initCells() {
         }
     cellsContent+="</div>"
 
-    cellsContent+="<div class='cell'>"
+    cellsContent+="<div class='cells'>"
     for (let i = 0; i < 100; i++) {
         cellsContent += "<div class='row'>";
         //columns
         for (let j = 0; j < 26; j++) {
-            cellsContent += "<div class='cell'>CELLS</div>";
+            cellsContent += "<div class='cell' contentEditable>CELLS</div>";
         }
         cellsContent+="</div>";
     }
