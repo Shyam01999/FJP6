@@ -48,7 +48,6 @@ for(let i=0; i<allCells.length; i++){
     allCells[i].addEventListener('blur',function(e){
         let cellValue = e.target.textContent;
         let rowId = e.target.getAttribute("rowid");
-        console.log(rowId)
         let colId = e.target.getAttribute("colid");
         let cellObject = db[rowId][colId];
         if(cellObject.value == cellValue){
