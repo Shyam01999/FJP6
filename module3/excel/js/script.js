@@ -27,7 +27,8 @@ function initDb(){
             let cellObject = {
                 name:name,
                 value:"",
-                formula:""
+                formula:"",
+                children:[]
             }
             row.push(cellObject);
         }
@@ -69,13 +70,12 @@ formulaInput.addEventListener("blur",function(e){
     if(formula){
         let {rowId, colId} = getRowIdColIdFromElement(lastSelectedCell);
         cellObject = db[rowId][colId];
-        let computedValue = solveFormula(formula);
+        let computedValue = solveFormula(formula, cellObject);
         //update db
         cellObject.value = computedValue;
         cellObject.formula = formula;
         //update ui
         lastSelectedCell.textContent = computedValue;
-
     }
 })
 

@@ -1,4 +1,4 @@
-function solveFormula(formula){
+function solveFormula(formula,selfCellObject){
     //formula = A1 + B2 + 2 - C3
     let formulaComps = formula.split(" ");
     //formulaComps = [A1,+,B2,+,2,-,C3];
@@ -8,6 +8,7 @@ function solveFormula(formula){
             let {rowId,colId} = getRowIdColIdFromAddress(formulaComp);
             let cellObject = db[rowId][colId];
             let value = cellObject.value;
+            cellObject.children.push(selfCellObject.name);
             formula = formula.replace(formulaComp,value);
         }
     }
