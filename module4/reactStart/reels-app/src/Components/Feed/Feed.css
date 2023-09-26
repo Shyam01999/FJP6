@@ -1,0 +1,17 @@
+.feedWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ /* .feedHeader{
+    width: 50%;
+    margin: 1rem;
+}  */
+
+ */
+
+.progress-feed{
+    margin-top: 3%;
+}

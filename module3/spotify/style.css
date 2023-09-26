@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&family=Inter:wght@300&family=Ubuntu&display=swap');
+
+body {
+    background-color: antiquewhite;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: black;
+    height: 3rem;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    color: white;
+
+}
+
+nav ul li {
+    padding: 0px 25px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    align-self: center;
+}
+
+.brand img {
+    width: 39px;
+    padding: 5px;
+}
+
+.container {
+    height: 80vh;
+}
+
+.songListContainer {}
+
+.songBanner {}
+
+.bottom {
+    position: sticky;
+    height: 4rem;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#progressBar {
+    width: 50vw;
+
+
+}

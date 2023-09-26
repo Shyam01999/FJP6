@@ -1,0 +1,87 @@
+.signupContainer{
+    background-color: #FEFCF3;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+    margin-top:3%;
+    margin-left: 30%;
+    border: 1px solid black;
+    max-width: 38%;
+    height:40rem;
+    border-radius: 5%;
+  }
+  
+  .header h2{
+    text-align: center;
+    color: #65647C;
+    font-size: 2rem;
+    text-transform: capitalize;
+    margin-bottom: 3rem;
+    
+  }
+  
+  .form-control{
+    margin: 0.5rem;
+    width: 30vw;
+    margin-top:0.5rem;
+    /* margin-bottom:-1rem; */
+    position: relative;
+
+  }
+
+  .form-control label{
+  display: inline-block;
+  /* margin-bottom:5px; */
+  }
+  
+  .form-control input{
+    width: 100%;
+    display: block;
+    font-family: "Poppins", sans-serif;
+    padding:10px;
+    font-size:14px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+  } 
+  
+  .form-control input:focus{
+    outline: 0;
+    border: 1px solid black;
+  }
+
+  .form-control .icon-wrong{
+    position: absolute;
+    left:95%;
+    bottom:40%;
+    color: #FF4A4A;
+  }
+
+  .form-control button{
+    background-color: lightgrey;
+    color: black;
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.7rem;
+    font-size: large;
+    cursor: pointer;
+  }
+
+  .form-control button:hover{
+   color:white;
+   background-color: rgba(64, 64, 64, 0.781);
+  }
+
+  .form-control h4{
+    color: #65647C;
+  }
+
+  .form-error{
+    color: #FF4A4A;
+    margin-top: 0.1rem;
+  }
+
+  

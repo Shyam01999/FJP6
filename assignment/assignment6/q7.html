@@ -1,0 +1,50 @@
+<!-- Dom manipulation -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Q- Create a panel which have following options:
+    1- create Element(element type as input) and append it to the end of body
+    2- Also able to add properties with property name and value as input -->
+
+  <!-- Solution: -->
+<h3>New Element</h3>
+<input type="text" id="newEle">
+<h3>Property</h3>
+<input type="text" id="prop">
+<h3>Value</h3>
+<input type="text" id="value">
+<input type="submit" value="create">
+
+<script>
+  let btn = document.querySelector('input[type="submit"]');
+  btn.addEventListener('click',function(){
+    let newEle = document.querySelector("#newEle").value;
+    let property = document.querySelector("#prop").value;
+    let value = document.querySelector("#value").value;
+    //console.log(newEle, property, value)
+    if(!newEle || !property || !value){
+      return
+    }
+    let ele = document.createElement(newEle);
+    ele[property] = value;
+    let body = document.querySelector("body");
+    body.append(ele);
+    
+    document.querySelector("#newEle").value="";
+    document.querySelector("#prop").value="";
+    document.querySelector("#value").value="";
+
+  })
+
+</script>
+</body>
+
+</html>

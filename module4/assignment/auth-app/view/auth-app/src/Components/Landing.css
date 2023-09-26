@@ -1,0 +1,53 @@
+.landingContainer {
+    height: 100%;
+}
+
+.navbarContainer {
+    height: 10vh;
+    background-color: #3F497F;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbarContainer ul {
+    margin-right: 2rem;
+    list-style: none;
+}
+
+.navbarContainer ul li:hover {
+    color: #96f51ae3;
+}
+
+.detailsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.userinfo{
+    width: 40vw;
+    background-color:#3795BD;
+    height: 60vh;
+    border-radius:1rem;
+    border: 2px solid black;
+}
+
+.userinfo ul{
+    list-style: none;
+    color: #E3DFFD; 
+    margin-top: 5rem;
+    margin-left: 2rem;
+    /* text-align: center; */
+}
+
+.userinfo ul li{
+    font-size: 2rem;
+}
+
+.userinfo span{
+    color: #393053;
+    font-weight: bold;
+}

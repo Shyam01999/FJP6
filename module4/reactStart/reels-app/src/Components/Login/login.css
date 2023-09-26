@@ -1,0 +1,61 @@
+.login_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginWrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.loginCard{
+    width: 27vw;
+    margin-top: 5%;
+}
+
+.insta-logo{
+    width: 100%;
+    display: flex;
+    align-items:center ;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.insta-logo img{
+    width: 15vw;
+}
+
+.login-title{
+    text-align: center;
+    color: grey;
+}
+
+.imgcard{
+    background-image : url('phone.png');
+    background-size:cover;
+    height: 590px;
+    width: 441px;
+    margin-top: 8vh;
+    position:relative;
+}
+
+.card{
+    height: 510px;
+    width: 241px;
+    position: absolute;
+    left: 146px;
+    top: 25px;
+}
+
+.loginContainer{
+    margin-top: 1rem;
+}
+
+.loginRedirect{
+    text-decoration: none;
+}
+
+.loginRedirect:hover{
+    color:blue
+}
