@@ -13,15 +13,17 @@ function AuthProvider({ children }) {
     const history = useHistory();
     const [user, setUser] = useState("");
     const [loading, setLoading] = useState(false);
+
     async function signUp(name, email, password,  confirm) {
         try {
             console.log("signup will be here");
             let res = await axios.post
                 ("http://localhost:8080/user/signup", {
                     name: name,
+                    email: email,
                     password: password,
                     confirmPassword: confirm,
-                    email
+                    
                 })
             console.log("data", res.data);
 
@@ -31,15 +33,18 @@ function AuthProvider({ children }) {
     }
 
     async function login(email, password) {
+        let flag = true;
         try {
             setLoading(true);
-            const res = await axios.post("/api/v1/auth/login", {
+            const res = await axios.post("http://localhost:8080/user/login", {
                 email: email,
                 password: password
             });
             setLoading(false);
-            // console.log("40",res.data);
-            setUser(res.data.user);
+            setUser(res.data.userDetails);
+            localStorage.setItem("user", JSON.stringify(res.data.userDetails));
+            return flag;
+            
         }
         catch (err) {
             console.log(err);
@@ -48,9 +53,18 @@ function AuthProvider({ children }) {
         console.log("login will be here");
     }
 
+    useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        if (storedUser) {
+            setUser(storedUser);
+        }
+    }, []);
+
+    
+
     function logout() {
-        // localStorage.removeItem("user")
-        // userSet(null);
+        localStorage.removeItem("user")
+        setUser(null);
         console.log("logout will come here");
     }
 

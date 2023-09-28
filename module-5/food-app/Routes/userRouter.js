@@ -16,9 +16,9 @@ userRouter
 .route('/signup')
 .post(signup)
 
-// userRouter
-// .route('/login')
-// .post(login)
+userRouter
+.route('/login')
+.post(login)
 
 // userRouter
 // .route('/logout')

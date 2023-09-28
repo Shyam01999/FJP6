@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema({
     },
     resetToken:String
 });
-
+ 
 //Pre post hooks in mongoose
 //after save event occurs
 // userSchema.post('save',function(doc){

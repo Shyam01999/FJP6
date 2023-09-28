@@ -9,15 +9,15 @@ function Signup(props) {
      const history = useHistory();
     const { signUp } = useAuth()
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
     const handleSignup = async () => {
-        console.log("user data",name, password, email, confirm);
+        console.log("user data",name, email, password, confirm);
         try {
             console.log("sending request");
             // do signup
-            await signUp(name, password, email, confirm);
+            await signUp(name, email, password, confirm);
             // send user to login 
             history.push("/login");
         }

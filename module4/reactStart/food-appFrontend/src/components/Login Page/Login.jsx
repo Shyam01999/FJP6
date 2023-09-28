@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-// import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthProvider';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
@@ -11,16 +11,18 @@ function Login() {
     const [password, Setpassword] = useState("")
     const [email,Setemail] = useState("");
     const [loading, setLoading] = useState(false);
-    // const {login, user} = useContext(AuthContext);
-
-
+    const {login, user} = useContext(AuthContext);
 
     const handleLogin = async () => {
         console.log("email = "+email+"password= "+password)
         try {
             // console.log(email,password)
-            await login(email, password)
-            history.push("/")
+            let flag = await login(email, password);
+            console.log(flag,'flag')
+            if(flag){
+                history.push("/")
+            }
+            
           } catch(err) {
             console.log(err);
           }

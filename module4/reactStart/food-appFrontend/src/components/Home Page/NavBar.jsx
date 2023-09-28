@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
-// import AuthProvider, { useAuth } from '../Context/AuthProvider';
 import '../Styles/nav.css'
+import { AuthContext } from '../Context/AuthProvider';
 
 function NavBar() {
     // console.log(localStorage.getItem("user"));
-    // const { user, logout } = useAuth()
-    const user = "Shyam"
-//  console.log(user)
+    const {user, logout} = useContext(AuthContext);
+    // console.log(user)
 ;    useEffect(() => {
         let navBar = document.querySelector("nav");
 
@@ -21,9 +20,7 @@ function NavBar() {
         });
     }, []);
 
-    const logout = ()=>{
-        
-    }
+
     
     return (
         <nav>
@@ -34,7 +31,7 @@ function NavBar() {
                     {user ?
                         <>
                             <li>
-                                <Link to="/profilePage">{user?.name}</Link>
+                                <Link to="/profilePage">{user.name}</Link>
                             </li>
                             <li>
                                 <Link to="" onClick={logout}>Logout</Link>
