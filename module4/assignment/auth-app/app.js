@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const app = express();
 app.listen(3000,()=>{
-    console.log(`Server Started at port 3000 `)
+    console.log(`Server Started at port 8000 `)
 });
 
 //Midddleware function -> post, front => json

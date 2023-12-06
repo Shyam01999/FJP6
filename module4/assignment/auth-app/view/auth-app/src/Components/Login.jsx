@@ -57,7 +57,7 @@ function Login() {
                 </div>
                 <div className="loginform-control">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Enter password" value={values.password} onChange={handleChange} onBlur={handleBlur}/>
+                    <input type="password" name="password" id="password" placeholder="Enter password" value={values.password} onChange={handleChange} onBlur={handleBlur} autoComplete='current-password'/>
                     {errors.password && touched.password ?<><p className='form-error'>{errors.password}</p><FontAwesomeIcon icon={faCircleXmark} className='icon-wrong'/></>:null}
                 </div>
                 

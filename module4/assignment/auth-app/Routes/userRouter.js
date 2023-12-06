@@ -4,9 +4,34 @@ const {getUser} = require('../controller/userController')
 
 const userRouter = express.Router();
 
+const multer = require('multer');
+
+const multerStorage = multer.diskStorage({
+    destination:function(req, file, cb){
+        cb(null,'public/images')
+    },
+    filename:function(req, file, cb){
+        cb(null, `user-${Date.now()}.jpeg`)
+    }
+})
+
+const filter = function(req, file, cb){
+    if(file.mimetype.startsWith("image")){
+        cb(null, true)
+    } else{
+        cb(new Error('Not an image! Please upload an image'), false)
+    }
+}
+
+const upload = multer({ 
+    dest: 'uploads/',
+    storage: multerStorage, 
+    fileFilter: filter
+})
+
 userRouter
 .route('/signup')
-.post(signup)
+.post(upload.single('profileImg'), signup)
 
 userRouter
 .route('/login')

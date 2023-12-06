@@ -18,6 +18,7 @@ const initialValues = {
 }
 
 function Signup() {
+    const [fieldValue, setFieldValue] = useState('');
     // const history = useHistory();
     const navigate = useNavigate();
     const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
@@ -26,7 +27,19 @@ function Signup() {
         onSubmit:async(values, action)=>{
             console.log(values);
             try{
-                const response = await axios.post('http://localhost:3000/user/signup',values)
+                const formData = new FormData();
+                formData.append('name', values.name);
+                formData.append('email', values.email);
+                formData.append('mobile', values.mobile);
+                formData.append('password', values.password);
+                formData.append('address', values.address);
+                formData.append('profileImg', values.profileImg);
+                console.log(formData,"formdata")
+                const response = await axios.post('http://localhost:3000/user/signup', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
                 console.log("respo->",response)
                 if(response.data.message == 'user signed up'){
                     alert('User register successfully now login')
@@ -42,8 +55,14 @@ function Signup() {
             }
             // action.resetForm()
         }
-    })
+    });
 
+    // const handleFileChange = (event)=>{
+    //     setFieldValue('profileImg', event.target.files[0]);
+        
+    // }
+
+    //console.log("imagepath",fieldValue);
   return (
     <div className="signupContainer">
         <div className="header">
@@ -68,7 +87,7 @@ function Signup() {
                 </div>
                 <div className="form-control">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Enter Password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
+                    <input type="password" name="password" id="password" placeholder="Enter Password" value={values.password} onChange={handleChange} onBlur={handleBlur} autoComplete='current-password'/>
                     {errors.password && touched.password ?<><p className='form-error'>{errors.password}</p><FontAwesomeIcon icon={faCircleXmark} className='icon-wrong'/></>:null}
                 </div>
                 <div className="form-control">

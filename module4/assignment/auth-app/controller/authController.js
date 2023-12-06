@@ -1,79 +1,116 @@
 const express = require('express');
 const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const JWT_KEY = require('../secrets')
+const JWT_KEY = require('../secrets');
 
-module.exports.signup = async function signup(req,res){
-    try{
+
+module.exports.signup = async function signup(req, res) {
+    try {
         let dataToBeCreateObj = req.body;
+        //console.log("req body",dataToBeCreateObj);
+        // file upload to spaces code start
+        // const AWS = require('aws-sdk');
+        // const fs = require('fs');
+
+        // // Configure the AWS SDK with your Digital Ocean Spaces credentials
+        // const spacesEndpoint = new AWS.Endpoint('nyc3.digitaloceanspaces.com'); // Update with your region
+        // const s3 = new AWS.S3({
+        //     endpoint: spacesEndpoint,
+        //     accessKeyId: 'YOUR_ACCESS_KEY',
+        //     secretAccessKey: 'YOUR_SECRET_KEY',
+        // });
+
+        // // Read the file from local storage
+        // const fileContent = fs.readFileSync('path/to/your/file.jpg');
+
+        // // Define the parameters for the upload
+        // const uploadParams = {
+        //     Bucket: 'your-space-name', // Update with your Space name
+        //     Key: 'path/in/space/file.jpg', // Update with your desired path and file name in the Space
+        //     Body: fileContent,
+        // };
+
+        // // Upload the file to Digital Ocean Spaces
+        // s3.upload(uploadParams, function (err, data) {
+        //     if (err) {
+        //         console.error("Error uploading file:", err);
+        //     } else {
+        //         console.log("File uploaded successfully. File URL:", data.Location);
+        //     }
+        // });
+        // if (req.file) {
+        //     // Assuming you have an 'uploads' directory to store images
+        //     dataToBeCreateObj.profileImage = req.file.location; // Use the URL provided by Digital Ocean Spaces
+        // }
+
         let user = await userModel.create(dataToBeCreateObj)
-        if(user){
+        if (user) {
             return res.json({
-                message:"user signed up",
-                data:user
+                message: "user signed up",
+                data: user
             })
         }
-        else{
+        else {
             res.json({
-                message:"error while signup",
+                message: "error while signup",
             })
         }
     }
-    catch(err){
+    catch (err) {
         res.json({
-            message:err.message
+            message: err.message
         })
     }
 }
 
-module.exports.login = async function login(req,res){
-    try{
+module.exports.login = async function login(req, res) {
+    try {
         let data = req.body
-        if(data.email && data.password){
-            let user= await userModel.findOne({email:data.email});
-            if(user){
+        if (data.email && data.password) {
+            let user = await userModel.findOne({ email: data.email });
+            if (user) {
                 //bcrypt => compare
-                if(user.password == data.password){
+                if (user.password == data.password) {
                     let uid = user['_id']; //uid
-                    let token = jwt.sign({payload:uid},JWT_KEY)
-                    res.cookie('login',token,{httpOnly:true})
+                    let token = jwt.sign({ payload: uid }, JWT_KEY)
+                    res.cookie('login', token, { httpOnly: true })
                     res.json({
-                        message:"User has logged in",
-                        userDetails:user
+                        message: "User has logged in",
+                        userDetails: user
                     })
                 }
-                else{
+                else {
                     res.json({
-                        message:"wrong credential"
+                        message: "wrong credential"
                     })
                 }
             }
-            else{
+            else {
                 res.json({
-                    message:"User not found"
+                    message: "User not found"
                 })
             }
 
-        }else{
+        } else {
             res.json({
-                message:"Empty field found"
+                message: "Empty field found"
             })
         }
     }
-    catch(err){
+    catch (err) {
         res.status(500).json({
-            message:err.message
+            message: err.message
         })
     }
 }
 
-module.exports.logout = function logout(req,res){
-    res.cookie('login',' ',{maxAge:1})
-    if(res.cookie == null){
+module.exports.logout = function logout(req, res) {
+    res.cookie('login', ' ', { maxAge: 1 })
+    if (res.cookie == null) {
         res.redirect('/')
     }
     res.json({
-        message:"user logged out successfully"
+        message: "user logged out successfully"
     })
 }
 //isAuthorised =>to check the user's role [admin,user,restruantowner,deliveryboy]
@@ -101,45 +138,45 @@ module.exports.logout = function logout(req,res){
 
 //protectRoute
 
-module.exports.protectRoute = async function protectRoute(req,res,next){
-    try{
-    let token;
-    if(req.cookies.login){
-        token = req.cookies.login
-        console.log(token);
-        let payload = jwt.verify(token,JWT_KEY);
-        if(payload){
-            const user = await userModel.findById(payload.payload)
-            req.role = user.role
-            req.id = user.id  
-            console.log("role->",req.role,"id->",req.id)
-            next()
+module.exports.protectRoute = async function protectRoute(req, res, next) {
+    try {
+        let token;
+        if (req.cookies.login) {
+            token = req.cookies.login
+            console.log(token);
+            let payload = jwt.verify(token, JWT_KEY);
+            if (payload) {
+                const user = await userModel.findById(payload.payload)
+                req.role = user.role
+                req.id = user.id
+                console.log("role->", req.role, "id->", req.id)
+                next()
+            }
+            else {
+                res.json({
+                    message: "user not verified"
+                })
+            }
         }
-        else{
-            res.json({
-                message:"user not verified"
-            })
-        }
-    }
-    else{
+        else {
             //browser
             const client = req.get('User-Agent');
-            if(client.includes('Mozilla')==true){
+            if (client.includes('Mozilla') == true) {
                 return res.redirect('/login')
             }
-            else{
-            //postman
-            res.json({
-                message:"please login "
-            })
+            else {
+                //postman
+                res.json({
+                    message: "please login "
+                })
             }
 
-         
+
+        }
     }
-}
-catch(err){
-    res.json({
-        message:err.message
-    })
-}
+    catch (err) {
+        res.json({
+            message: err.message
+        })
+    }
 }
