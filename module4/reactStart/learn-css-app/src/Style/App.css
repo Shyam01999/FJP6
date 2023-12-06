@@ -1,0 +1,21 @@
+/* heading section css */
+.header-container {
+  height: 10rem;
+  background-color: var(--heading-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header-container ul {
+  display: flex;
+  gap: 5rem;
+  margin: auto 10rem;
+}
+
+.header-container ul li {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+}

@@ -1,0 +1,53 @@
+/* Base Rule Of CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  /* (1rem = 10px )*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+p,
+li,
+a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/* Theme Rule Of CSS */
+:root {
+  --main-color: #FED9ED;
+  --supporting-color: #E7BCDE;
+  --bg-color: #F8FFD2;
+  --font-color: #092635;
+  --heading-color: #3843d6;
+  --para-color: #5C8374;
+  --text-color: #ECF4D6;
+  --btn-color: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(103, 9, 121, 1) 15%, rgba(70, 69, 165, 1) 43%, rgba(0, 212, 255, 1) 100%);
+}
+
+/* Layout Rule Of CSS */
