@@ -1,4 +1,5 @@
 const pool = require("../../db");
+const bcrypt = require('bcryptjs')
 const { registerQuery, emailExistQuery, contactnumberExistQuery } = require("../../queries/Auth/authQuery");
 
 const home = async (req, res) => {
@@ -18,8 +19,14 @@ const register = async (req, res) => {
     try {
         let { username, email, password, contactnumber, role } = req.body;
 
+        //user default role
         const defaultrole = 'user';
         role = role || defaultrole;
+
+        //secure the password
+        const saltRound = 10;
+        const hashPassword = await bcrypt.hash(password, saltRound)
+        password = hashPassword;
 
         if (username === '') {
             return res.status(501).json({ message: 'Username does not exist' });
