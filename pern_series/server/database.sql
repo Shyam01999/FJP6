@@ -1,8 +1,11 @@
 CREATE DATABASE testDemoapp;
 
-CREATE TABLE users (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255)
+CREATE TABLE "user" (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255) ,
+    contactnumber VARCHAR(255) UNIQUE,
+    role VARCHAR(255)
 );
 
