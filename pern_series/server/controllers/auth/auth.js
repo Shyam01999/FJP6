@@ -1,5 +1,6 @@
 const pool = require("../../db");
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { registerQuery, emailExistQuery, contactnumberExistQuery } = require("../../queries/Auth/authQuery");
 
 const home = async (req, res) => {
@@ -51,9 +52,11 @@ const register = async (req, res) => {
             }
             else {
                 const registerData = await pool.query(registerQuery, [username, email, password, contactnumber, role]);
-
                 if (registerData.rowCount == 1) {
-                    res.status(200).json({ message: 'Account created' });
+                    // Generate a JWT token
+                    const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+
+                    res.status(200).json({ message: 'Registration Successful', token, role });
                 }
             }
         }
@@ -65,6 +68,37 @@ const register = async (req, res) => {
     }
 };
 
+// ****************************
+//        Login Controller
+// ****************************
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const emailExist = await pool.query(emailExistQuery, [email]);
+        if (emailExist.rows.length > 0) {
+            // Retrieve the hashed password from the database
+            const hashedPassword = emailExist.rows[0].password;
+            const userid = emailExist.rows[0].id;
+            const passwordCheck = await bcrypt.compare(password, hashedPassword);
+            if (passwordCheck) {
+                // Generate a JWT token
+                const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+                return res.status(400).json({ message: 'Login Successful', token, userid });
+            }
+            else {
+                return res.status(400).json({ message: 'Invalid Credentials' });
+            }
+
+        }
+        else {
+            return res.status(400).json({ message: 'Invalid Credentials' });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" })
+    }
+}
 
 
-module.exports = { home, register }
+module.exports = { home, register, login }
