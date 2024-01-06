@@ -16,6 +16,9 @@ const home = async (req, res) => {
     }
 }
 
+// ****************************
+//   Registration Controller
+// ****************************
 const register = async (req, res) => {
     try {
         let { username, email, password, contactnumber, role } = req.body;
@@ -29,37 +32,24 @@ const register = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, saltRound)
         password = hashPassword;
 
-        if (username === '') {
-            return res.status(501).json({ message: 'Username does not exist' });
-        } else if (email === '') {
-            return res.status(501).json({ message: 'Email does not exist' });
-        } else if (password === '') {
-            return res.status(501).json({ message: 'Password does not exist' });
-        } else if (password.length <= 6) {
-            return res.status(501).json({ message: 'Password must be at least 7 characters' });
-        } else if (contactnumber === '') {
-            return res.status(501).json({ message: 'Contact number does not exist' });
-        } else if (contactnumber.length < 10) {
-            return res.status(501).json({ message: 'Contact number must be at least 10 digits' });
-        } else {
-            const emailExist = await pool.query(emailExistQuery, [email]);
-            const contactnumberExist = await pool.query(contactnumberExistQuery, [contactnumber]);
-            if (emailExist.rows.length > 0) {
-                return res.status(400).json({ message: 'User with this email already exists' });
-            }
-            else if (contactnumberExist.rows.length > 0) {
-                return res.status(400).json({ message: 'User with this number already exist' })
-            }
-            else {
-                const registerData = await pool.query(registerQuery, [username, email, password, contactnumber, role]);
-                if (registerData.rowCount == 1) {
-                    // Generate a JWT token
-                    const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        const emailExist = await pool.query(emailExistQuery, [email]);
+        const contactnumberExist = await pool.query(contactnumberExistQuery, [contactnumber]);
+        if (emailExist.rows.length > 0) {
+            return res.status(400).json({ message: 'User with this email already exists' });
+        }
+        else if (contactnumberExist.rows.length > 0) {
+            return res.status(400).json({ message: 'User with this number already exist' })
+        }
+        else {
+            const registerData = await pool.query(registerQuery, [username, email, password, contactnumber, role]);
+            if (registerData.rowCount == 1) {
+                // Generate a JWT token
+                const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-                    res.status(200).json({ message: 'Registration Successful', token, role });
-                }
+                res.status(200).json({ message: 'Registration Successful', token, role });
             }
         }
+
     } catch (error) {
         console.log(error);
         res.status(400).send({
@@ -69,7 +59,7 @@ const register = async (req, res) => {
 };
 
 // ****************************
-//        Login Controller
+//   Login Controller
 // ****************************
 const login = async (req, res) => {
     try {
