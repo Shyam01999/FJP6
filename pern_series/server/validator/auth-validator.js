@@ -16,7 +16,7 @@ const registerSchema = z.object({
     password: z
         .string({ required_error: "Password is required" })
         .trim()
-        .min(3, { message: 'Password must be at least of 3 characters.' })
+        .min(6, { message: 'Password must be at least of 6 characters.' })
         .max(100, { message: 'Password must not be more than 100 characters' }),
     contactnumber: z
         .string({ required_error: "Contact Number is required" })
@@ -31,4 +31,19 @@ const registerSchema = z.object({
 
 })
 
-module.exports = registerSchema;
+//creating an login object schema
+const loginSchema = z.object({
+    email: z
+        .string({ required_error: "Email is required" })
+        .trim()
+        .email({ message: "Invalid email address" })
+        .min(3, { message: 'Email must be at least of 3 characters.' })
+        .max(255, { message: 'Email must not be more than 255 characters' }),
+    password: z
+        .string({ required_error: "Password is required" })
+        .trim()
+        .min(6, { message: 'Password must be at least of 6 characters.' })
+        .max(100, { message: 'Password must not be more than 100 characters' }),
+
+})
+module.exports = {registerSchema, loginSchema};
