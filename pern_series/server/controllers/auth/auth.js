@@ -19,7 +19,7 @@ const home = async (req, res) => {
 // ****************************
 //   Registration Controller
 // ****************************
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     try {
         let { username, email, password, contactnumber, role } = req.body;
 
@@ -51,17 +51,18 @@ const register = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
-        res.status(400).send({
-            msg: 'Page not Found'
-        });
+        // console.log(error);
+        // res.status(400).send({
+        //     msg: 'Page not Found'
+        // });
+        next(error)
     }
 };
 
 // ****************************
 //   Login Controller
 // ****************************
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
@@ -86,7 +87,8 @@ const login = async (req, res) => {
         }
     }
     catch (error) {
-        res.status(500).json({ msg: "Internal Server Error" })
+        // res.status(500).json({ msg: "Internal Server Error" })
+        next(error)
     }
 }
 
