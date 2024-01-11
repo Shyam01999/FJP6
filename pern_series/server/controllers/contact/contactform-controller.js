@@ -13,7 +13,7 @@ const allContactFormList = async (req, res, next) => {
             return res.status(200).json({ message: 'Contact Form Data',data: allContactData.rows });
         }
         else {
-            return res.status(200).json({ message: 'No contact Form Data Found' });
+            return res.status(200).json({ message: 'No contact Form Data Found', data:[] });
         }
     }
     catch (error) {
