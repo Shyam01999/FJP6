@@ -1,0 +1,15 @@
+.container{
+    max-width: 140rem;
+    padding: 2.4rem 4.4rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul {
+    display: flex;
+    gap: 3.2rem;
+}
+
+ul li{
+    font-size: 1.5rem;
+}
