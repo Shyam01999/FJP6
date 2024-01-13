@@ -1,6 +1,7 @@
-.container{
+.container {
     max-width: 140rem;
     padding: 2.4rem 4.4rem;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
@@ -10,7 +11,57 @@ ul {
     gap: 3.2rem;
 }
 
-ul li{
+ul li {
     font-size: 1.5rem;
     list-style: none;
 }
+
+.grid-two-cols {
+    justify-content: center;
+    gap: 7rem;
+}
+
+.registration-image img {
+    border-radius: 4rem;
+}
+
+.main-heading {
+    text-transform: capitalize;
+    font-size: 4rem;
+    font-weight: 500;
+    /* border-bottom: 0.4rem solid var(--btn-color); */
+}
+
+.highlight-text {
+    border-bottom: 0.4rem solid var(--btn-color);
+}
+
+.registration-form label {
+    text-transform: capitalize;
+    display: block;
+    margin: 0.5rem 0rem;
+}
+
+.registration-form input {
+    width: 100%;
+    padding-left: 0.3rem;
+    padding: 0.5rem;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: var(--input-color);
+    color: var(--bg-color);
+}
+
+.btn-submit{
+    border: none;
+    background-color: var(--btn-color);
+    color: var(--bg-color);
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0.9rem;
+    border-radius:0.7rem;
+    transition: all 0.3s linear;
+}
+
+
+

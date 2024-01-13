@@ -11,27 +11,31 @@
   --btn-color: #646cff;
   --dark-color: #242424;
   --helper-color: #99b9ff;
+  --input-color: #607274;
 }
 
 html {
   font-size: 62.5%;
 }
 
-body{
+body {
   background-color: var(--dark-color);
-  /* color: var(--bg-color); */
+  color: var(--bg-color);
 }
 
-p, li, label,
+p,
+li,
+label,
 input,
-textarea{
+textarea {
   font-size: 1.8rem;
   line-height: 1.56;
   letter-spacing: 0.1rem;
   word-spacing: 0.06rem;
+  border: none;
 }
 
-a{
+a {
   font-weight: 500;
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
@@ -39,6 +43,8 @@ a{
   text-decoration: inherit;
 }
 
-
-
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

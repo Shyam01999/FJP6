@@ -5,7 +5,7 @@ function Register() {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    
+    alert("Under construction")
   }
   return (
     <section>
@@ -16,24 +16,24 @@ function Register() {
               <img src="./images/register.jpg" alt="registration image" width="500" height="500"/>
             </div>
             <div className='registration-form'>
-              <h1 className='main-heading mb-3'>registration form</h1>
+              <h1 className='main-heading mb-3'><span className='highlight-text'>registration f</span>orm</h1>
               <br />
               <form onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="username">username</label>
-                  <input type="text" name='username' placeholder='username' id='username' required autoComplete='off'/>
+                  <input type="text" name='username' id='username' required autoComplete='off'/>
                 </div>
                 <div>
                   <label htmlFor="email">email</label>
-                  <input type="email" name='email' placeholder='email' id='email' required autoComplete='off'/>
+                  <input type="email" name='email' id='email' required autoComplete='off'/>
                 </div>
                 <div>
                   <label htmlFor="password">password</label>
-                  <input type="password" name='password' placeholder='password' id='password' required autoComplete='off'/>
+                  <input type="password" name='password' id='password' required autoComplete='off'/>
                 </div>
                 <div>
                   <label htmlFor="contact number">contact number</label>
-                  <input type="number" name='contact number' placeholder='contact number' id='contact number' required autoComplete='off'/>
+                  <input type="number" name='contact number' id='contact number' required autoComplete='off'/>
                 </div>
                 <br />
                 <button type='submit' className='btn btn-submit'>Register Now</button>
