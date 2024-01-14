@@ -23,11 +23,6 @@ const registerSchema = z.object({
         .trim()
         .min(10, { message: 'Contact Number must be at least of 10 characters.' })
         .max(20, { message: 'Contact Number must not be more than 20 characters' }),
-    role: z
-        .string({ required_error: "role is required" })
-        .trim()
-        .min(3, { message: 'role must be at least of 3 characters.' })
-        .max(10, { message: 'role must not be more than 10 characters' }),
 
 })
 

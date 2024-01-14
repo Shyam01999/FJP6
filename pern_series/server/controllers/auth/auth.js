@@ -21,8 +21,9 @@ const home = async (req, res) => {
 // ****************************
 const register = async (req, res, next) => {
     try {
+        // res.header('Access-Control-Allow-Credentials', true);
         let { username, email, password, contactnumber, role } = req.body;
-
+        // console.log("backend data",req.body);
         //user default role
         const defaultrole = 'user';
         role = role || defaultrole;
@@ -35,10 +36,10 @@ const register = async (req, res, next) => {
         const emailExist = await pool.query(emailExistQuery, [email]);
         const contactnumberExist = await pool.query(contactnumberExistQuery, [contactnumber]);
         if (emailExist.rows.length > 0) {
-            return res.status(400).json({ message: 'User with this email already exists' });
+            return res.status(200).json({ message: 'User with this email already exists' });
         }
         else if (contactnumberExist.rows.length > 0) {
-            return res.status(400).json({ message: 'User with this number already exist' })
+            return res.status(200).json({ message: 'User with this number already exist' })
         }
         else {
             const registerData = await pool.query(registerQuery, [username, email, password, contactnumber, role]);
@@ -55,6 +56,7 @@ const register = async (req, res, next) => {
         // res.status(400).send({
         //     msg: 'Page not Found'
         // });
+        console.log(error);
         next(error)
     }
 };

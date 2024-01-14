@@ -54,6 +54,7 @@ ul li {
 
 .btn-submit{
     border: none;
+    cursor: pointer;
     background-color: var(--btn-color);
     color: var(--bg-color);
     font-size: 2rem;
