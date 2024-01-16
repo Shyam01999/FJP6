@@ -67,7 +67,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-
+        // console.log("data",req.body)
         const emailExist = await pool.query(emailExistQuery, [email]);
         if (emailExist.rows.length > 0) {
             // Retrieve the hashed password from the database
@@ -77,10 +77,10 @@ const login = async (req, res, next) => {
             if (passwordCheck) {
                 // Generate a JWT token
                 const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-                return res.status(400).json({ message: 'Login Successful', token, userid });
+                return res.status(200).json({ message: 'Login Successful', token, userid });
             }
             else {
-                return res.status(400).json({ message: 'Invalid Credentials' });
+                return res.status(200).json({ message: 'Invalid Credentials' });
             }
 
         }
@@ -90,6 +90,7 @@ const login = async (req, res, next) => {
     }
     catch (error) {
         // res.status(500).json({ msg: "Internal Server Error" })
+        // res.status(500).json({ error: err.message });
         next(error)
     }
 }

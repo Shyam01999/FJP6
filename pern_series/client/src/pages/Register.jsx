@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [data, setData] = useState({
@@ -9,6 +10,7 @@ function Register() {
     contactnumber: "",
   });
 
+  const navigate = useNavigate();
   //Handle change to store update data in state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +49,7 @@ function Register() {
           password: "",
           contactnumber: "",
         });
+        navigate("/login");
       } else {
         // The request failed
         alert(response.data.message);
