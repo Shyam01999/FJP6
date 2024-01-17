@@ -23,6 +23,13 @@ body {
   color: var(--bg-color);
 }
 
+/* base Rule */
+h1{
+font-size: 5.4rem;
+line-height: 1.1;
+font-weight: bold;
+}
+
 p,
 li,
 label,
@@ -48,3 +55,4 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
