@@ -107,14 +107,15 @@ ul li {
     margin: 0.5rem 0rem;
 }
 
-.registration-form input {
-    width: 100%;
+.registration-form input, .registration-form textarea {
+    width: 70%;
     padding-left: 0.3rem;
     padding: 0.5rem;
     outline: none;
     border-radius: 0.5rem;
     background-color: var(--input-color);
     color: var(--bg-color);
+    resize: none;
 }
 
 .btn-submit {
