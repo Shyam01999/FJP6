@@ -6,5 +6,6 @@ const contactRouter = express.Router();
 
 contactRouter.route('/allcontact').get(allContactFormList)
 contactRouter.route('/contact').post(validate(contactSchema), contactform)
+// contactRouter.post('/contact',validate(contactSchema), contactform)
 
 module.exports = contactRouter;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function Contact() {
   const [data, setData] = useState({
@@ -19,39 +20,35 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // alert("Under construction");
-    // if (
-    //   data.username == "" ||
-    //   data.email == "" ||
-    //   data.contactnumber == "" ||
-    //   data.password == ""
-    // ) {
-    //   alert("You have empty feild");
-    // } else {
-    try {
-      // console.log("data", data);
-      // Assuming 'yourApiEndpoint' is the actual endpoint to send data to
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        data,
-        { withCredentials: true }
-      );
-      // console.log("res", response);
-      if (response.data.message == "Login Successful") {
-        localStorage.setItem("token", response.data.token);
-        alert(response.data.message);
+    if (data.username == "" || data.email == "" || data.message == "") {
+      alert("You have empty feild");
+    } else {
+      try {
+        // console.log("data", data);
+        // Assuming 'yourApiEndpoint' is the actual endpoint to send data to
+        const response = await axios.post(
+          "http://localhost:8080/api/form/contact",
+          data,
+          { withCredentials: true }
+        );
+        // console.log("res", response);
+        if (response.data.message == "Message Sent Successfully'") {
+          alert(response.data.message);
+          // navigate("/");
+        } else {
+          // The request failed
+          alert(response.data.message);
+        }
         setData({
+          username: "",
           email: "",
-          password: "",
+          message: "",
         });
-        navigate("/");
-      } else {
-        // The request failed
-        alert(response.data.message);
+      } catch (error) {
+        console.error(`Contact page error ${error}`);
       }
-    } catch (error) {
-      console.error(`Registration page error ${error}`);
+      // }
     }
-    // }
   };
 
   return (

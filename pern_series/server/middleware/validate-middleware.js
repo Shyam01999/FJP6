@@ -6,7 +6,6 @@ const validate = (schema) =>async (req, res, next) => {
         next();
     }
     catch(err){
-        
         const error = {
             status : 500,
             message :"Fill the input properly",
