@@ -19,15 +19,28 @@ html {
 }
 
 body {
+  margin: 0;
+  min-height: 100vh;
   background-color: var(--dark-color);
   color: var(--bg-color);
 }
 
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 100% of the viewport height */
+}
+
+.container {
+  flex: 1; /* This will make the container take up the remaining vertical space */
+}
+
 /* base Rule */
-h1{
-font-size: 5.4rem;
-line-height: 1.1;
-font-weight: bold;
+h1 {
+  font-size: 5.4rem;
+  line-height: 1.1;
+  font-weight: bold;
 }
 
 p,
@@ -56,3 +69,18 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+header{
+  position: sticky;
+  top: 0;
+  background-color: var(--dark-color);
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  background-color: var(--btn-color);
+  color: var(--bg-color);
+  font-size: 1.4rem;
+  font-weight: 500;
+  /* width: 100%; */
+}

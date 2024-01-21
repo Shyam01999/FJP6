@@ -6,7 +6,7 @@ function Navbar() {
     <header>
       <div className="container">
         <div className="logo-brand">
-          <NavLink to="/"><h2>Shop kart</h2></NavLink>
+          <NavLink to="/"><h2>Food App</h2></NavLink>
         </div>
         <nav>
           <ul>
