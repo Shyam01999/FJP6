@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import  {useAuth}  from "../store/auth";
 
 function Register() {
   const [data, setData] = useState({
@@ -11,6 +12,7 @@ function Register() {
   });
 
   const navigate = useNavigate();
+  const {storeTokenInLS} = useAuth();
   //Handle change to store update data in state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,15 +25,14 @@ function Register() {
   //Handle submit to send data
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // alert("Under construction");
-    // if (
-    //   data.username == "" ||
-    //   data.email == "" ||
-    //   data.contactnumber == "" ||
-    //   data.password == ""
-    // ) {
-    //   alert("You have empty feild");
-    // } else {
+    if (
+      data.username == "" ||
+      data.email == "" ||
+      data.contactnumber == "" ||
+      data.password == ""
+    ) {
+      alert("You have empty feild");
+    } else {
     try {
       // console.log("data", data);
       // Assuming 'yourApiEndpoint' is the actual endpoint to send data to
@@ -40,7 +41,7 @@ function Register() {
         data,
         { withCredentials: true }
       );
-      // console.log("res", response);
+      // console.log("res", response.data.token);
       if (response.data.message == "Registration Successful") {
         alert(response.data.message);
         setData({
@@ -49,6 +50,7 @@ function Register() {
           password: "",
           contactnumber: "",
         });
+        storeTokenInLS(response.data.token);
         navigate("/login");
       } else {
         // The request failed
@@ -57,7 +59,7 @@ function Register() {
     } catch (error) {
       console.error(`Registration page error ${error}`);
     }
-    // }
+    }
   };
   return (
     <section>

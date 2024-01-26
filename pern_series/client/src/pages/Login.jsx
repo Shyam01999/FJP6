@@ -1,14 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
+
 
 function Login() {
   const [data, setData] = useState({
     email: "",
     password: ""
   });
+  // const [loadPage, setLoadPage] = useState(false);
 
   const navigate = useNavigate();
+  const {storeTokenInLS} = useAuth();
   //Handle change to store update data in state
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,20 +43,21 @@ function Login() {
         { withCredentials: true }
       );
       // console.log("res", response);
-      if (response.data.message == "Login Successful") {
-        localStorage.setItem('token', response.data.token)
+      if (response.data.message == "Login Successful") { 
         alert(response.data.message);
         setData({
           email: "",
           password: "",
         });
+        
+        storeTokenInLS(response.data.token);
         navigate("/");
       } else {
         // The request failed
         alert(response.data.message);
       }
     } catch (error) {
-      console.error(`Registration page error ${error}`);
+      console.error(`Login page error ${error}`);
     }
     // }
   };
