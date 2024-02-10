@@ -1,0 +1,9 @@
+/* Theme Rule */
+:root {
+    --white-color: #f4f3ff;
+    --text-color:#f4f3ff;
+    --btn-color: #646cff;
+    --dark-color: #242424;
+    --helper-color: #99b9ff;
+    --input-color: #607274;
+  }

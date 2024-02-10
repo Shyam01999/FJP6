@@ -1,0 +1,9 @@
+/* states rule */
+button:hover{
+    box-shadow: inset 0 0 0 0.2rem var(--bg-color);
+
+}
+
+a:hover, a.active{
+    color: var(--btn-color);
+}
