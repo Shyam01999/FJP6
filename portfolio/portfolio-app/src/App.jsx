@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './styles/layout.css';
 import './styles/module.css';
@@ -9,7 +9,13 @@ import './styles/theme.css';
 import './styles/states.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from './components/NotFound';
-import Homepage from './pages/Homepage';
+import Home from './pages/Home';
+import About from './pages/About';
+import Skills from './pages/Skills';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import Header from './components/Header';
+import Services from './pages/Services';
 
 
 function App() {
@@ -19,8 +25,14 @@ function App() {
     <>
       <BrowserRouter>
         <ToastContainer />
+        <Header/>
         <Routes>
-          <Route path="/" element={<Homepage/>}/>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/skills" element={<Skills/>}/>
+          <Route path="/projects" element={<Projects/>}/>
+          <Route path="/services" element={<Services/>}/>
+          <Route path="/contact" element={<Contact/>}/>
           <Route path="*" element={<NotFound />} />
 
           {/* <Route path="/" element={<SideBar><ProtectRoute /></SideBar>}>

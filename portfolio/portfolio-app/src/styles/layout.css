@@ -1,11 +1,26 @@
 /* layout rule */
 .container {
-    max-width: 140rem;
-    padding: 2.4rem 4.4rem;
-    margin: 0 auto;
+    padding: 2rem 9%;
     display: flex;
     justify-content: space-between;
-    flex: 1;
+    align-items: center;
+    background: var(--dark-color);
+}
+
+.logo-brand h2{
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.logo-brand span{
+    color: var(--logo-color);
+}
+
+.navbar li a{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--logo-color);
 }
 
 .grid {
@@ -82,3 +97,13 @@
     justify-content: center;
 }
 /* footer section end */
+
+/* home section start */
+section{
+    margin-top: 10rem;
+    display: flex;
+
+    color: var(--text-color);
+}
+
+/* home section end */
