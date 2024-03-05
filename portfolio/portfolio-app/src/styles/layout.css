@@ -64,10 +64,15 @@
 #intro {
     display: flex;
     justify-content: space-between;
+    gap: 10rem;
     width: 100%;
     color: var(--text-color);
     margin-top: 6rem;
     padding: 5rem 15rem;
+}
+
+.intro-details{
+    max-width: 45%;
 }
 
 .intro-greet {
@@ -89,6 +94,7 @@
 .designation {
     font-size: 2.5rem;
     line-height: 1.5;
+    height: 0.5rem;
     /* color: var(--logo-color); */
 }
 
@@ -106,5 +112,76 @@
     width: 22vw;
     height: 40vh;
 }
+
+.description{
+    font-size: 1.4rem;
+    letter-spacing: 0.2rem;
+}
+
+.button-container{
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0rem;
+}
+
+.commonBtn{
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.25rem;
+    border: 0.3rem solid var(--logo-color);
+    padding: 1.5rem;
+    border-radius: 5rem;
+    text-align: center;
+    width: 35%;
+    max-width: 35%;
+}
+
+.socialmedia-container{
+    display: flex;
+    gap: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.socialmedia-icon{
+    width: 3.5rem;
+    height: 3.5rem;
+    /* border: 0.2rem solid var(--logo-color); */
+    border-radius: 50%;
+    cursor: pointer; 
+}
+
+.socialmedia-icon.fb{
+    background-image: url("../../public/images/facebook.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.socialmedia-icon.Instagram{
+    background-image: url("../../public/images/instagram.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.socialmedia-icon.gmail{
+    background-image: url("../../public/images/gmail.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.socialmedia-icon.linkedin{
+    background-image: url("../../public/images/linkedin.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.socialmedia-icon.whatapp{
+    background-image: url("../../public/images/whatapp.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
 
 /* home section end */
