@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Stepper from "../components/Stepper";
 
 function Services() {
   return (
-    <h1>This is Services page</h1>
-  )
+    <div>
+      <h2>Practice Stepper app</h2>
+      <Stepper />
+    </div>
+  );
 }
 
-export default Services
+export default Services;
