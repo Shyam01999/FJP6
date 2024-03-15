@@ -19,10 +19,7 @@ app.use(cors({
     optionsSuccessStatus: 204,
 }));
 
-
-
-
-
+//rest api end point
 app.use("/api/auth", authRouter);
 app.use("/api/form", contactRouter);
 
