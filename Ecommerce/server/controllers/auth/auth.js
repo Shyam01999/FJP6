@@ -98,8 +98,8 @@
 
 // module.exports = { home, register, login }
 
-const { sequelize } = require('../../db'); // Import Sequelize instance
-const User = require('../../models/authmodel');
+const db = require("../../models/index")
+const User = db.User;
 
 // Define controller functions
 const getAllUsers = async (req, res) => {
