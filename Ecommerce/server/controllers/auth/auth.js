@@ -82,21 +82,32 @@ const login = async (req, res, next) => {
 }
 
 // Define controller functions
-// const getAllUsers = async (req, res) => {
-//   try {
-//     const users = await User.findAll();
-//     res.json(users);
-//   } catch (error) {
-//     console.error('Error fetching users:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// };
-
-
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    if (users.length > 0) {
+      res.json({
+        message: "All Users in database",
+        data: users
+      });
+    } else {
+      res.json({
+        message: "No Users Found",
+        data: []
+      });
+    }
+    
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 // Export controller functions
 module.exports = {
-  // home,
   register,
-  login
+  login,
+  getAllUsers
+  
+  
 }
