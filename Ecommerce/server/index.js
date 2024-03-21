@@ -21,7 +21,7 @@ app.use(cors({
 
 //rest api end point
 app.use("/api/auth", authRouter);
-app.use("/api/form", contactRouter);
+// app.use("/api/form", contactRouter);
 
 
 app.use(errorMiddleware)

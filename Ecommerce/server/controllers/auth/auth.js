@@ -1,99 +1,102 @@
-const pool = require("../../db");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { registerQuery, emailExistQuery, contactnumberExistQuery } = require("../../queries/Auth/authQuery");
+const db = require("../../models/index")
+const User = db.User;
 
-const home = async (req, res) => {
-    try {
-        res.status(200).send(
-            'Welcome to home page controller'
-        )
+// // ****************************
+// //   Registration Controller
+// // ****************************
+const register = async (req, res) => {
+  try {
+    let { username, email, password, mobilenumber, role } = req.body;
+    //user default role
+    const defaultrole = 'user';
+    role = role || defaultrole;
+
+    // const saltRound = 10;
+    // const hashPassword = await bcrypt.hash(password, saltRound)
+    // password = hashPassword;
+
+    // Check if the email already exists in the database
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with this email already exists' });
     }
-    catch (error) {
-        res.status(400).send({
-            msg: "Page not Found"
-        })
+
+    // Check if the mobile number already exists in the database
+    const existingMobileUser = await User.findOne({ where: { mobilenumber } });
+    if (existingMobileUser) {
+      return res.status(400).json({ message: 'User with this mobile number already exists' });
     }
-}
 
-// ****************************
-//   Registration Controller
-// ****************************
-const register = async (req, res, next) => {
-    try {
-        // res.header('Access-Control-Allow-Credentials', true);
-        let { username, email, password, contactnumber, role } = req.body;
-        // console.log("backend data",req.body);
-        //user default role
-        const defaultrole = 'user';
-        role = role || defaultrole;
-
-        //secure the password
-        const saltRound = 10;
-        const hashPassword = await bcrypt.hash(password, saltRound)
-        password = hashPassword;
-
-        const emailExist = await pool.query(emailExistQuery, [email]);
-        const contactnumberExist = await pool.query(contactnumberExistQuery, [contactnumber]);
-        if (emailExist.rows.length > 0) {
-            return res.status(200).json({ message: 'User with this email already exists' });
-        }
-        else if (contactnumberExist.rows.length > 0) {
-            return res.status(200).json({ message: 'User with this number already exist' })
-        }
-        else {
-            const registerData = await pool.query(registerQuery, [username, email, password, contactnumber, role]);
-            if (registerData.rowCount == 1) {
-                // Generate a JWT token
-                const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-
-                res.status(200).json({ message: 'Registration Successful', token, role });
-            }
-        }
-
-    } catch (error) {
-        // console.log(error);
-        // res.status(400).send({
-        //     msg: 'Page not Found'
-        // });
-        console.log(error);
-        next(error)
+    // If email and mobile number are unique, proceed with user registration
+    const newUser = await User.create({ username, email, password, mobilenumber, role });
+    if (newUser) {
+      // Generate a JWT token
+      const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+      res.status(201).json({ message: 'Registration Successful', token, role });
+    } else {
+      res.status(500).json({ error: 'Registration failed' });
     }
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
-// ****************************
-//   Login Controller
-// ****************************
+// // ****************************
+// //   Login Controller
+// // ****************************
 const login = async (req, res, next) => {
-    try {
-        const { email, password } = req.body;
-        // console.log("data",req.body)
-        const emailExist = await pool.query(emailExistQuery, [email]);
-        if (emailExist.rows.length > 0) {
-            // Retrieve the hashed password from the database
-            const hashedPassword = emailExist.rows[0].password;
-            const userid = emailExist.rows[0].id;
-            const passwordCheck = await bcrypt.compare(password, hashedPassword);
-            if (passwordCheck) {
-                // Generate a JWT token
-                const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-                return res.status(200).json({ message: 'Login Successful', token, userid });
-            }
-            else {
-                return res.status(200).json({ message: 'Invalid Credentials' });
-            }
+  try {
+    const { email, password } = req.body;
+    const emailExist = await User.findOne({where : {email}});
+    if (emailExist) {
+   
+      // Retrieve the hashed password from the database
+      // const hashedPassword = emailExist.rows[0].password;
+      // const passwordCheck = await bcrypt.compare(password, hashedPassword);
+      const userid = emailExist.dataValues.id
+      const userstorepassword = emailExist.dataValues.password;
+      const passwordCheck = userstorepassword == password
+      
+      if (passwordCheck) {
+        // Generate a JWT token
+        const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+        return res.status(200).json({ message: 'Login Successful', token, userid });
+      }
+      else {
+        return res.status(200).json({ message: 'Invalid Credentials' });
+      }
 
-        }
-        else {
-            return res.status(400).json({ message: 'Invalid Credentials' });
-        }
     }
-    catch (error) {
-        // res.status(500).json({ msg: "Internal Server Error" })
-        // res.status(500).json({ error: err.message });
-        next(error)
+    else {
+      return res.status(400).json({ message: 'Invalid Credentials' });
     }
+  }
+  catch (error) {
+    // res.status(500).json({ msg: "Internal Server Error" })
+    // res.status(500).json({ error: err.message });
+    next(error)
+  }
 }
 
+// Define controller functions
+// const getAllUsers = async (req, res) => {
+//   try {
+//     const users = await User.findAll();
+//     res.json(users);
+//   } catch (error) {
+//     console.error('Error fetching users:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
 
-module.exports = { home, register, login }
+
+
+// Export controller functions
+module.exports = {
+  // home,
+  register,
+  login
+}
