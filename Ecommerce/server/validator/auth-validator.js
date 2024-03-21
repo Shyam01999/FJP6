@@ -18,11 +18,14 @@ const registerSchema = z.object({
         .trim()
         .min(6, { message: 'Password must be at least of 6 characters.' })
         .max(100, { message: 'Password must not be more than 100 characters' }),
-    contactnumber: z
-        .string({ required_error: "Contact Number is required" })
+    mobilenumber: z
+        .string({ required_error: "Mobile Number is required" })
         .trim()
-        .min(10, { message: 'Contact Number must be at least of 10 characters.' })
-        .max(20, { message: 'Contact Number must not be more than 20 characters' }),
+        .min(10, { message: 'Mobile Number must be at least of 10 characters.' })
+        .max(20, { message: 'Mobile Number must not be more than 20 characters' }),
+    role: z
+        .string({ required_error: "" })
+        .trim()
 
 })
 
@@ -41,4 +44,4 @@ const loginSchema = z.object({
         .max(100, { message: 'Password must not be more than 100 characters' }),
 
 })
-module.exports = {registerSchema, loginSchema};
+module.exports = { registerSchema, loginSchema };

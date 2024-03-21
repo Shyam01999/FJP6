@@ -39,7 +39,7 @@ db.User = require("./authmodel.js")(sequelize, DataTypes);
 
 db.sequelize.sync({force: false})
 .then(()=>{
-    console.log('Yes re-sync done!')
+    console.log('Database connected Successfully!')
 })
 
 module.exports = db
