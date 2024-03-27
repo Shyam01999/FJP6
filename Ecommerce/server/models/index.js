@@ -36,6 +36,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.User = require("./authmodel.js")(sequelize, DataTypes);
+db.Product = require("./productmodel.js")(sequelize, DataTypes);
 
 db.sequelize.sync({force: false})
 .then(()=>{

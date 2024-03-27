@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saanvi Print Screen Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        @font-face {
+            font-family: 'SF pro';
+            src: url("./SF\ Proverbial\ Gothic.ttf");
+        }
+
+        .print-section {
+            max-width: 1420px;
+            margin: 0rem auto;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        .first-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .saanvi_logo {
+            padding: 1rem;
+        }
+
+        .saanvi-logo {
+            width: 180vw;
+            height: 180vh;
+        }
+
+        .saanvi-brand-container {
+            padding: 1rem;
+            width: 65%;
+        }
+
+        .saanvi-brand {
+            font-size: 1.47rem;
+        }
+
+        .saanvi-deails {
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            line-height: 1.3;
+        }
+
+        .saanvi-contact-details {
+            padding: 1rem;
+            width: 35%;
+        }
+
+        .logo {
+            position: relative;
+            right: 0;
+            background-color: #F59E0B;
+            color: #F9FAFB;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            padding: 0.5rem;
+            margin-left: 10rem;
+            border-radius: 0.2rem;
+        }
+
+        .saanvi-details-section {
+            margin-right: 1rem;
+        }
+
+        .saanvi-contact {
+            margin-left: 0.7rem;
+        }
+
+        .second-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .gst-section {
+            padding: 1rem;
+        }
+
+        .gst {
+            margin: 0rem 5rem 0rem 0rem;
+        }
+
+        .invoiceno-section {
+            padding: 1rem;
+            text-align: end;
+        }
+
+        .third-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .customer-details-section {
+            padding: 0.5rem 0rem 0.5rem 15rem;
+        }
+
+        .four-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .address-section {
+            display: flex;
+            /* gap: rem; */
+        }
+
+        .billto-section {
+            border-right: 2px solid black;
+            padding: 1rem;
+            text-align: start;
+        }
+
+        .shipto-section {
+            padding: 1rem;
+            text-align: start;
+        }
+
+        .title {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 25%;
+        }
+
+        .desc {
+            display: inline-block;
+            font-size: 0.8rem;
+            /* letter-spacing: 0.03rem; */
+        }
+
+        .desc.part {
+            text-align: end;
+            position: relative;
+            left: 25.65%;
+        }
+
+        .five-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .payment-section{
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header {
+            /* display: flex;
+            width: 65%; */
+            padding-right: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="print-section">
+        <table>
+            <tr class="first-section">
+                <td class="saanvi_logo">
+                    <img src="./images/saanvi.png" alt="Saanvi Logo">
+                </td>
+                <td class="saanvi-brand-container">
+                    <h1 class="saanvi-brand">SAANVI ENTERPRISES</h1>
+                    <p class="saanvi-deails">M-8, New Sudha Nursing Home</p>
+                    <p class="saanvi-deails">Basanti Nagar, Rourkela, Sundargarh</p>
+                    <p class="saanvi-deails">Odisha - 769012</p>
+                </td>
+                <td class="saanvi-contact-details">
+                    <p class="logo">INVOICE</p>
+                    <p class="saanvi-deails">
+                        <span class="saanvi-details-section">Phone No: </span>
+                        <span class="saanvi-contact">+91-9437178212</span>
+                    </p>
+                    <p class="saanvi-deails">
+                        <span class="saanvi-details-section">Website: </span>
+                        <span>www.saanviavs.com</span>
+                    </p>
+                    <p class="saanvi-deails">
+                        <span class="saanvi-details-section">Email:</span>
+                        <span>saanviavs@gmail.com</span>
+                    </p>
+                </td>
+            </tr>
+            <tr class="second-section">
+                <td class="gst-section" colspan="2">
+                    <span class="gst">GSTIN: 36AAACH7409R1Z2</span>
+                    <span>PAN: AADCS0472N</span>
+                </td>
+                <td class="invoiceno-section">
+                    <span>Invoice No: INV-0001</span>
+                </td>
+            </tr>
+            <tr class="third-section">
+                <td class="customer-details-section" colspan="3">
+                    <span>Customer Details</span>
+                </td>
+            </tr>
+            <tr class="four-section">
+                <td colspan="3">
+                    <div class="address-section">
+                        <div class="billto-section">
+                            <p>
+                                <span class="title">Bill To:</span>
+                                <span class="desc">Shyam Enterprises</span>
+                            </p>
+                            <p>
+                                <span class="title">Address</span>
+                                <span class="desc">
+                                    Reet Regency, 12, Peary Mohan Roy Road,
+                                </span>
+                                <span class="desc part">
+                                    Near Chetla Agrani Club, Kolkata -
+                                </span>
+                                <span class="desc part">
+                                    700027.
+                                </span>
+                            </p>
+                            <p>
+                                <span class="title">
+                                    Phone:
+                                </span>
+                                <span class="desc">
+                                    9853456525
+                                </span>
+                            </p>
+                            <p>
+                                <span class="title">
+                                    GSTIN:
+                                </span>
+                                <span class="desc">
+                                    07AOLCC1206D1ZG
+                                </span>
+                            </p>
+                        </div>
+                        <div class="shipto-section">
+                            <p>
+                                <span class="title">Ship To:</span>
+                                <span class="desc">Shyam Enterprises</span>
+                            </p>
+                            <p>
+                                <span class="title">Address</span>
+                                <span class="desc">
+                                    Reet Regency, 12, Peary Mohan Roy Road,
+                                </span>
+                                <span class="desc part">
+                                    Near Chetla Agrani Club, Kolkata -
+                                </span>
+                                <span class="desc part">
+                                    700027.
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="five-section">
+                <td colspan="3">
+                    <div class="payment-section">
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Vendor ID:</span>
+                                <span class="desc ">V-0004</span>
+                            </p>
+                            <p>
+                                <span class="header">GI No:</span>
+                                <span class="desc">
+                                    GI\SAANVI\0005
+                                </span>
+                            </p>
+                            <p>
+                                <span class="header">
+                                    Payment Terms:
+                                </span>
+                                <span class="desc">
+                                    Due on receipt
+                                </span>
+                            </p>
+                            <p>
+                                <span class="header">
+                                    Payment Due Date:
+                                </span>
+                                <span class="desc">
+                                    02/03/2024
+                                </span>
+                            </p>
+                        </div>
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Vehicle Type:</span>
+                                <span class="desc">Company Transport</span>
+                            </p>
+                            <p>
+                                <span class="header">Transport name</span>
+                                <span class="desc">SAANVI</span>
+                            </p>
+                            <p>
+                                <span class="header">Vehicle no:</span>
+                                <span class="desc">OD-14-0213</span>
+                            </p>
+                            <p>
+                                <span class="header">E-Way Bill:</span>
+                                <span class="desc">EWB54864584</span>
+                            </p>
+                        </div>
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Invoice Date:</span>
+                                <span class="desc">10/01/2024</span>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
