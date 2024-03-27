@@ -129,6 +129,42 @@
             padding: 1rem;
             text-align: start;
         }
+
+        .title {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 25%;
+        }
+
+        .desc {
+            display: inline-block;
+            font-size: 0.8rem;
+            /* letter-spacing: 0.03rem; */
+        }
+
+        .desc.part {
+            text-align: end;
+            position: relative;
+            left: 25.65%;
+        }
+
+        .five-section {
+            width: 100%;
+            border-bottom: 2px solid black;
+        }
+
+        .payment-section{
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header {
+            /* display: flex;
+            width: 65%; */
+            padding-right: 1rem;
+        }
     </style>
 </head>
 
@@ -180,54 +216,112 @@
                     <div class="address-section">
                         <div class="billto-section">
                             <p>
-                                <span>Bill To:</span>
-                                <span>Shyam Enterprises</span>
+                                <span class="title">Bill To:</span>
+                                <span class="desc">Shyam Enterprises</span>
                             </p>
                             <p>
-                                <span>Address</span>
-                                <span>
+                                <span class="title">Address</span>
+                                <span class="desc">
                                     Reet Regency, 12, Peary Mohan Roy Road,
                                 </span>
-                                <span>
+                                <span class="desc part">
                                     Near Chetla Agrani Club, Kolkata -
                                 </span>
-                                <span>
+                                <span class="desc part">
                                     700027.
                                 </span>
                             </p>
                             <p>
-                                <span>
+                                <span class="title">
                                     Phone:
                                 </span>
-                                <span>
+                                <span class="desc">
                                     9853456525
                                 </span>
                             </p>
                             <p>
-                                <span>
+                                <span class="title">
                                     GSTIN:
                                 </span>
-                                <span>
+                                <span class="desc">
                                     07AOLCC1206D1ZG
                                 </span>
                             </p>
                         </div>
                         <div class="shipto-section">
                             <p>
-                                <span>Ship To:</span>
-                                <span>Shyam Enterprises</span>
+                                <span class="title">Ship To:</span>
+                                <span class="desc">Shyam Enterprises</span>
                             </p>
                             <p>
-                                <span>Address</span>
-                                <span>
+                                <span class="title">Address</span>
+                                <span class="desc">
                                     Reet Regency, 12, Peary Mohan Roy Road,
                                 </span>
-                                <span>
+                                <span class="desc part">
                                     Near Chetla Agrani Club, Kolkata -
                                 </span>
-                                <span>
+                                <span class="desc part">
                                     700027.
                                 </span>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="five-section">
+                <td colspan="3">
+                    <div class="payment-section">
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Vendor ID:</span>
+                                <span class="desc ">V-0004</span>
+                            </p>
+                            <p>
+                                <span class="header">GI No:</span>
+                                <span class="desc">
+                                    GI\SAANVI\0005
+                                </span>
+                            </p>
+                            <p>
+                                <span class="header">
+                                    Payment Terms:
+                                </span>
+                                <span class="desc">
+                                    Due on receipt
+                                </span>
+                            </p>
+                            <p>
+                                <span class="header">
+                                    Payment Due Date:
+                                </span>
+                                <span class="desc">
+                                    02/03/2024
+                                </span>
+                            </p>
+                        </div>
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Vehicle Type:</span>
+                                <span class="desc">Company Transport</span>
+                            </p>
+                            <p>
+                                <span class="header">Transport name</span>
+                                <span class="desc">SAANVI</span>
+                            </p>
+                            <p>
+                                <span class="header">Vehicle no:</span>
+                                <span class="desc">OD-14-0213</span>
+                            </p>
+                            <p>
+                                <span class="header">E-Way Bill:</span>
+                                <span class="desc">EWB54864584</span>
+                            </p>
+                        </div>
+                        <div class="payment-details">
+                            <p>
+                                <span class="header">Invoice Date:</span>
+                                <span class="desc">10/01/2024</span>
                             </p>
                         </div>
                     </div>
