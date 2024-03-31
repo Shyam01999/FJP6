@@ -1,6 +1,25 @@
 const db = require("../../models/index");
 const Product = db.Product;
 
+//create product
+const createProduct = async (req, res) => {
+    try {
+        let {name, description, price, rating, image, category, stock, numOfReviews, reviews} = req.body;
+        const newProduct = await Product.create({name, description, price, rating, image, category, stock, numOfReviews, reviews});
+        if(newProduct){
+            res.status(201).json({message:"Product added Successfully"})
+        }
+        else {
+            res.status(500).json({message:"Product not added"})
+        }
+    }
+    catch (error) {
+        console.log('Error in creating product:', error);
+        res.status(500).json({error : "Internal Server Error"})
+    }
+}
+
+//getallproduct
 const getAllProduct = async (req, res) => {
     try {
         const allproducts = await Product.findAll();
@@ -18,5 +37,6 @@ const getAllProduct = async (req, res) => {
 }
 
 module.exports = {
-    getAllProduct
+    getAllProduct,
+    createProduct
 }
