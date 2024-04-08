@@ -40,7 +40,7 @@ const getAllProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const {name, description, price, rating, image, category, stock, numOfReviews, reviews } = req.body;
+        const { name, description, price, rating, image, category, stock, numOfReviews, reviews } = req.body;
         let findProduct = await Product.findByPk(id);
 
         if (!findProduct) {
@@ -87,7 +87,24 @@ const deleteProduct = async (req, res) => {
         res.status(200).json({ message: `Product with ID ${id} deleted successfully` });
 
     } catch (error) {
-        console.error('Error deleting user:', error);
+        console.error('Error deleting product:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+//getproduct detail
+const getProductDetails = async (req, res) => {
+    try {
+        const { id } = req.params;
+        let productDetails = await Product.findByPk(id);
+        if (!productDetails) {
+            return res.status(404).json({ message: "Product not found" });
+        } else {
+            res.status(200).json({ message: "Product:", data: productDetails });
+        }
+    }
+    catch (error) {
+        console.error('Error in fetching product details:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
@@ -96,5 +113,6 @@ module.exports = {
     getAllProduct,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductDetails
 }
