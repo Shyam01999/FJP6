@@ -1,4 +1,5 @@
 const db = require("../../models/index");
+const ApiFeatures = require("../../utils/apifeatures");
 const Product = db.Product;
 
 //create product -- Admin
@@ -22,7 +23,10 @@ const createProduct = async (req, res) => {
 //getallproduct
 const getAllProduct = async (req, res) => {
     try {
-        const allproducts = await Product.findAll();
+        const apiFeature = new ApiFeatures(Product.findAll(), req.query).search()
+        // const allproducts = await Product.findAll();
+        const allproducts = await apiFeature.query;
+
         if (allproducts.length > 0) {
             res.status(200).json({ message: "All products", data: allproducts })
         }
