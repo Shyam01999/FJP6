@@ -1,23 +1,38 @@
+const { where } = require("sequelize");
 const db = require("../models/index");
 const Product = db.Product;
 
 class ApiFeatures {
-    constructor(query, queryStr){
+    constructor(query, queryStr) {
         this.query = query;
         this.queryStr = queryStr;
     }
 
-    search(){
-        const keyword = this.queryStr.keyword ? 
-        {
-            name : {
-                [db.Sequelize.Op.iLike]: `%${this.queryStr.keyword}%`
-            },
-        }: {}
+    search() {
+        const keyword = this.queryStr.keyword ?
+            {
+                name: {
+                    [db.Sequelize.Op.iLike]: `%${this.queryStr.keyword}%`
+                },
+            } : {}
 
         console.log("keyword", keyword);
 
         this.query = Product.findAll({ where: { ...keyword } });
+        return this;
+    }
+
+    filter() {
+        const queryCopy = { ...this.queryStr };
+
+        console.log("queryCopy", queryCopy);
+
+        const removeFeilds = ['Keyword', 'page', 'limit'];
+
+        removeFeilds.forEach((key) => delete queryCopy[key]);
+
+        this.query = Product.findAll({ where: { ...queryCopy } }); 
+
         return this;
     }
 }

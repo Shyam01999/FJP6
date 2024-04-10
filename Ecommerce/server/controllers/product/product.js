@@ -23,7 +23,7 @@ const createProduct = async (req, res) => {
 //getallproduct
 const getAllProduct = async (req, res) => {
     try {
-        const apiFeature = new ApiFeatures(Product.findAll(), req.query).search()
+        const apiFeature = new ApiFeatures(Product.findAll(), req.query).search().filter();
         // const allproducts = await Product.findAll();
         const allproducts = await apiFeature.query;
 
