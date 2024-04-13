@@ -30,7 +30,8 @@ const register = async (req, res) => {
     }
 
     // If email and mobile number are unique, proceed with user registration
-    const newUser = await User.create({ username, email, password, mobilenumber, role });
+    const newUser = await User.create({ username, email, password, mobilenumber, avatar:{public_id:"this is sample id", url:"profilepicurl"}, role });
+    // console.log("newuser", newUser);
     if (newUser) {
       // Generate a JWT token
       const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
