@@ -12,7 +12,7 @@ const validate = (schema) =>async (req, res, next) => {
             extraDetails : err.errors[0].message
         }
         // console.log("Validation Error:", error);
-        res.status(200).json({ message: error.extraDetails});
+        res.status(400).json({ message: error.extraDetails});
         next(error);
         // const message = err.errors[0].message;
         // console.log(message)

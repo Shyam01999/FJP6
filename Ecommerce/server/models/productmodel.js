@@ -1,34 +1,79 @@
 module.exports = (sequelize, DataTypes) => {
     const Product = sequelize.define('Product', {
-        username: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: false // Assuming first name is required
+            allowNull: false
         },
-        email: {
+        description: {
             type: DataTypes.STRING,
-            allowNull: false, // Assuming email is required
-            unique: true, // Assuming email should be unique
+            allowNull: false,
+        },
+        price: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+        },
+        rating: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+        },
+        // image: [
+        //     {
+        //         public_id: {
+        //             type: DataTypes.STRING,
+        //             allowNull: false
+        //         },
+        //         url: {
+        //             type: DataTypes.STRING,
+        //             allowNull: false
+        //         }
+
+        //     }
+        // ],
+        image: {
+            type: DataTypes.JSON,
+            allowNull: false
+        },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        stock: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
+        numOfReviews: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
             validate: {
-                isEmail: true // Validates email format
+                max: 10000000
             }
         },
-        mobilenumber: {
-            type: DataTypes.STRING,
-            allowNull: false,// Assuming first name is required
-            validate: {
-                isNumeric: true, // Validates if the value is numeric
-                len: [10, 11] // Validates length between 10 and 11 digits
-            }
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false // Assuming first name is required  
-        },
-        role: {
-            type: DataTypes.STRING,
-            allowNull: false // Assuming last name is required
-        },
-    }) 
+
+        // reviews: [
+        //     {
+        //         name: {
+        //             type: DataTypes.STRING,
+        //             allowNull: false
+        //         },
+        //         ratings: {
+        //             type: DataTypes.INTEGER,
+        //             allowNull: false
+        //         },
+        //         comment: {
+        //             type: DataTypes.STRING,
+        //             allowNull: false
+        //         }
+        //     }
+        // ]
+
+        reviews: {
+            type: DataTypes.JSON,
+            allowNull: false
+        }
+    })
 
     return Product
 }

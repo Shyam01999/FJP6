@@ -6,8 +6,9 @@ const port = process.env.PORT;
 //const pool = require('./db');
 const bodyParser = require("body-parser");
 const authRouter = require('./router/auth-router/auth-router');
-const errorMiddleware = require("./middleware/error-middleware");
 const contactRouter = require("./router/contact-router/contact-router");
+const productRouter = require("./router/product-router/product-router");
+const errorMiddleware = require("./middleware/error-middleware");
 
 app.use(express.json()); //middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +23,7 @@ app.use(cors({
 //rest api end point
 app.use("/api/auth", authRouter);
 // app.use("/api/form", contactRouter);
+app.use("/api/product", productRouter);
 
 
 app.use(errorMiddleware)
