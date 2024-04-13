@@ -24,13 +24,14 @@ const createProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
     try {
         const resultPerPage = 5;
+        const productCount  = await Product.count();
         const apiFeature = new ApiFeatures(Product.findAll(), req.query).search().filter().pagination(resultPerPage);
         const allproducts = await apiFeature.query;
         if (allproducts.length > 0) {
-            res.status(200).json({ message: "All products", data: allproducts })
+            res.status(200).json({ message: "All products", data: allproducts, productCount })
         }
         else {
-            res.status(404).json({ message: "No product Found", data: [] })
+            res.status(404).json({ message: "No product Found", data: [], productCount })
         }
     }
     catch (error) {
