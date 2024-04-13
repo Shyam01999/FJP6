@@ -23,10 +23,9 @@ const createProduct = async (req, res) => {
 //getallproduct
 const getAllProduct = async (req, res) => {
     try {
-        const apiFeature = new ApiFeatures(Product.findAll(), req.query).search().filter();
-        // const allproducts = await Product.findAll();
+        const resultPerPage = 5;
+        const apiFeature = new ApiFeatures(Product.findAll(), req.query).search().filter().pagination(resultPerPage);
         const allproducts = await apiFeature.query;
-
         if (allproducts.length > 0) {
             res.status(200).json({ message: "All products", data: allproducts })
         }
@@ -112,6 +111,8 @@ const getProductDetails = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+
 
 module.exports = {
     getAllProduct,
