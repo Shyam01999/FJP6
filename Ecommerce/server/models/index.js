@@ -8,7 +8,8 @@ const sequelize = new Sequelize(
     dbConfig.password, {
     host: dbConfig.host,
     dialect: dbConfig.dialect,
-    operatorsAliases: false,
+    logging: dbConfig.logging,
+    // operatorsAliases: false,
 
     pool: {
         max: dbConfig.pool.max,
@@ -40,7 +41,7 @@ db.Product = require("./productmodel.js")(sequelize, DataTypes);
 
 db.sequelize.sync({force: false})
 .then(()=>{
-    console.log('Database connected Successfully!')
+    console.log('Database sync Successfully!')
 })
 
 module.exports = db
