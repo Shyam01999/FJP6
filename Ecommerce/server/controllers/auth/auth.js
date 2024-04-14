@@ -34,7 +34,7 @@ const register = async (req, res) => {
 
     // If email and mobile number are unique, proceed with user registration
     const newUser = await User.create({ username, email, password, mobilenumber, avatar: { public_id: "this is sample id", url: "profilepicurl" }, role });
-    // console.log("newuser", newUser);
+
     if (newUser) {
       sendToken(email, "Registration Successful", 201, newUser, res)
     } else {
@@ -122,7 +122,6 @@ const updateUser = async (req, res) => {
 
     // Find the user by ID
     let user = await User.findByPk(id);
-    console.log("User", user);
 
     if (!user) {
       return res.status(404).json({ message: `User with this id:${id} not found` });
