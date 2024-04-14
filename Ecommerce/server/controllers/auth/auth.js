@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const db = require("../../models/index")
+const db = require("../../models/index");
+const sendToken = require('../../utils/sendToken');
 const User = db.User;
 
 // // ****************************
@@ -13,6 +14,7 @@ const register = async (req, res) => {
     const defaultrole = 'user';
     role = role || defaultrole;
 
+    // hash password
     // const saltRound = 10;
     // const hashPassword = await bcrypt.hash(password, saltRound)
     // password = hashPassword;
@@ -30,12 +32,10 @@ const register = async (req, res) => {
     }
 
     // If email and mobile number are unique, proceed with user registration
-    const newUser = await User.create({ username, email, password, mobilenumber, avatar:{public_id:"this is sample id", url:"profilepicurl"}, role });
+    const newUser = await User.create({ username, email, password, mobilenumber, avatar: { public_id: "this is sample id", url: "profilepicurl" }, role });
     // console.log("newuser", newUser);
     if (newUser) {
-      // Generate a JWT token
-      const token = jwt.sign({ email, role }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-      res.status(201).json({ message: 'Registration Successful', token, role });
+      sendToken(email, "Registration Successful", 201, newUser, res )
     } else {
       res.status(500).json({ error: 'Registration failed' });
     }
@@ -62,9 +62,7 @@ const login = async (req, res, next) => {
       const passwordCheck = userstorepassword == password
 
       if (passwordCheck) {
-        // Generate a JWT token
-        const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
-        return res.status(200).json({ message: 'Login Successful', token, userid });
+        return sendToken(email, "Login Successful", 200, emailExist, res );
       }
       else {
         return res.status(200).json({ message: 'Invalid Credentials' });
@@ -151,7 +149,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const {id} = req.body;
+    const { id } = req.body;
 
     // Find the user by ID
     const user = await User.findByPk(id);
