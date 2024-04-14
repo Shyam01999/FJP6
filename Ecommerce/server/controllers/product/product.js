@@ -5,8 +5,9 @@ const Product = db.Product;
 //create product -- Admin
 const createProduct = async (req, res) => {
     try {
-        let { name, description, price, rating, image, category, stock, numOfReviews, reviews } = req.body;
-        const newProduct = await Product.create({ name, description, price, rating, image, category, stock, numOfReviews, reviews });
+        req.body.user = req.user.id;
+        let { name, description, price, rating, image, category, stock, numOfReviews, reviews, user} = req.body;
+        const newProduct = await Product.create({ name, description, price, rating, image, category, stock, numOfReviews, reviews, user });
         if (newProduct) {
             res.status(201).json({ message: "Product added Successfully" })
         }

@@ -72,7 +72,14 @@ module.exports = (sequelize, DataTypes) => {
         reviews: {
             type: DataTypes.JSON,
             allowNull: false
+        },
+
+        user:{
+            type:DataTypes.INTEGER,
+            allowNull:false
         }
+
+
     })
 
     return Product

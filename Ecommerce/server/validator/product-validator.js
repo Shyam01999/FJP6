@@ -30,7 +30,7 @@ const productSchema = z.object({
                 ratings: z.number({ required_error: "Review ratings is required" }),
                 comments: z.string({ required_error: "Review comment is required" }).trim()
             }
-        ))
+        )),
 })
 
 module.exports = { productSchema }
