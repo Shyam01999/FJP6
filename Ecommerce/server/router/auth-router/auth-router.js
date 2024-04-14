@@ -6,6 +6,7 @@ const authRouter = express.Router();
 
 authRouter.route('/register').post(validate(registerSchema), authController.register); 
 authRouter.route('/login').post(validate(loginSchema), authController.login);
+authRouter.route('/logout').get(authController.logout);
 authRouter.route('/allusers').get(authController.getAllUsers);
 authRouter.route('/update/user').post(authController.updateUser);
 authRouter.route('/delete/user').post(authController.deleteUser);

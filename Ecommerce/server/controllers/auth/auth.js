@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const db = require("../../models/index");
 const sendToken = require('../../utils/sendToken');
+const db = require("../../models/index");
+const errorMiddleware = require('../../middleware/error-middleware');
+// const errorMiddleware = require('../../middleware/error-middleware');
 const User = db.User;
 
 // // ****************************
@@ -35,7 +36,7 @@ const register = async (req, res) => {
     const newUser = await User.create({ username, email, password, mobilenumber, avatar: { public_id: "this is sample id", url: "profilepicurl" }, role });
     // console.log("newuser", newUser);
     if (newUser) {
-      sendToken(email, "Registration Successful", 201, newUser, res )
+      sendToken(email, "Registration Successful", 201, newUser, res)
     } else {
       res.status(500).json({ error: 'Registration failed' });
     }
@@ -62,7 +63,7 @@ const login = async (req, res, next) => {
       const passwordCheck = userstorepassword == password
 
       if (passwordCheck) {
-        return sendToken(email, "Login Successful", 200, emailExist, res );
+        return sendToken(email, "Login Successful", 200, emailExist, res);
       }
       else {
         return res.status(200).json({ message: 'Invalid Credentials' });
@@ -77,6 +78,19 @@ const login = async (req, res, next) => {
     // res.status(500).json({ msg: "Internal Server Error" })
     // res.status(500).json({ error: err.message });
     next(error)
+  }
+}
+
+const logout = async (req, res, next) => {
+  try {
+    const options = {
+      expires: new Date(Date.now()),
+      httpOnly: true
+    };
+    res.status(200).cookie("token", null, options).json({ message: "Loggedout Successfully" })
+  }
+  catch (error) {
+    errorMiddleware(error, req, res, next);
   }
 }
 
@@ -172,6 +186,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   register,
   login,
+  logout,
   getAllUsers,
   updateUser,
   deleteUser
