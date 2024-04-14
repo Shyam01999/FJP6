@@ -11,9 +11,9 @@ const isAuthenticated = async (req, res, next) => {
             return res.status(401).json({ message: "Please Login to access this resource" })
         }
         const decodedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        
-        req.user = await User.findOne({ where: {email: decodedData.email } });
-        
+
+        req.user = await User.findOne({ where: { email: decodedData.email } });
+
         if (!req.user) {
             return res.status(401).json({ message: "User not found" });
         }
@@ -25,4 +25,19 @@ const isAuthenticated = async (req, res, next) => {
     }
 }
 
-module.exports = isAuthenticated;
+const authorizeRole = (...roles) => async (req, res, next) => {
+    try {
+        if (!roles.includes(req.user.role)) {
+            return res.status(403).json({ message: `Role: ${req.user.role} is not allowed to access this resource.` })
+        }
+        next();
+    }
+    catch (error) {
+        errorMiddleware(error);
+    }
+}
+
+module.exports = {
+    isAuthenticated,
+    authorizeRole
+};
