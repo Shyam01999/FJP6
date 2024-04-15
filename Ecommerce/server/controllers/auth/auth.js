@@ -2,7 +2,10 @@ const bcrypt = require('bcryptjs');
 const sendToken = require('../../utils/sendToken');
 const db = require("../../models/index");
 const errorMiddleware = require('../../middleware/error-middleware');
-// const errorMiddleware = require('../../middleware/error-middleware');
+const sendEmail = require('../../utils/sendEmail');
+const crypto = require('crypto');
+const { Op } = require('sequelize');
+
 const User = db.User;
 
 // // ****************************
@@ -81,6 +84,9 @@ const login = async (req, res, next) => {
   }
 }
 
+// // ****************************
+// //   Logout Controller
+// // ****************************
 const logout = async (req, res, next) => {
   try {
     const options = {
@@ -93,6 +99,86 @@ const logout = async (req, res, next) => {
     errorMiddleware(error, req, res, next);
   }
 }
+
+// // ****************************
+// //   Forgot password Controller
+// // ****************************
+const forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    // Find user by email
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Generate reset password token for the user
+    const resetToken = user.getResetPasswordToken();
+
+    // Save the user instance to persist the reset token and expiry time
+    await user.save({ validateBeforeSave: false });
+
+    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/auth/password/reset/${resetToken}`;
+
+    const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: `Ecommerce Password Recovery`,
+        message,
+      })
+
+      return res.status(200).json({ message: `Email sent to ${user.email} successfully` });
+    }
+    catch (error) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+
+      await user.save({ validateBeforeSave: false });
+
+      return res.status(500).json({ message: error.message })
+    }
+
+  }
+  catch (error) {
+    errorMiddleware(error, req, res, next);
+  }
+}
+
+// // ****************************
+// //   Reset Password Controller
+// // ****************************
+const resetPassword = async (req, res, next) => {
+
+  //creating token hash 
+  const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
+
+  // Find user by reset token and check expiration
+  const user = await User.findOne({
+    where: {
+      resetPasswordToken: resetPasswordToken,
+      resetPasswordExpire: { [Op.gt]: Date.now() },
+    },
+  });
+
+  if (!user) {
+    return res.status(400).json({ message: 'Reset Password token is invalid or has been expired' });
+  }
+
+  if (req.body.password != req.body.confirmPassword) {
+    return res.status(400).json({ message: 'Password does not match' });
+  }
+
+  // Update user's password
+  user.password = req.body.password;
+  user.resetPasswordToken = null;
+  user.resetPasswordExpire = null;
+  await user.save();
+  
+  // Password reset successful
+  sendToken(user.email, "Password reset successful", 200, user, res);
+};
 
 // Define controller functions
 const getAllUsers = async (req, res) => {
@@ -181,6 +267,9 @@ const deleteUser = async (req, res) => {
   }
 }
 
+
+
+
 // Export controller functions
 module.exports = {
   register,
@@ -188,5 +277,7 @@ module.exports = {
   logout,
   getAllUsers,
   updateUser,
-  deleteUser
+  deleteUser,
+  forgotPassword,
+  resetPassword
 }
