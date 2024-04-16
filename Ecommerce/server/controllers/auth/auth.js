@@ -5,6 +5,7 @@ const errorMiddleware = require('../../middleware/error-middleware');
 const sendEmail = require('../../utils/sendEmail');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
+const { password } = require('../../config/dbConfig');
 
 const User = db.User;
 
@@ -175,12 +176,12 @@ const resetPassword = async (req, res, next) => {
   user.resetPasswordToken = null;
   user.resetPasswordExpire = null;
   await user.save();
-  
+
   // Password reset successful
   sendToken(user.email, "Password reset successful", 200, user, res);
 };
 
-// Define controller functions
+// Get All User Controller
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
@@ -202,10 +203,12 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+//Update User
 const updateUser = async (req, res) => {
   try {
     const { id, username, email, password, mobilenumber, role } = req.body;
-
+    //we will use cloudinary later
+    const avatar = { public_id: "this is sample id", url: "profilepicurl" };
     // Find the user by ID
     let user = await User.findByPk(id);
 
@@ -235,6 +238,7 @@ const updateUser = async (req, res) => {
     user.password = password || user.password;
     user.mobilenumber = mobilenumber || user.mobilenumber;
     user.role = role || user.role;
+    user.avatar = avatar || user.avatar;
 
     // Save the updated user
     user = await user.save();
@@ -246,6 +250,7 @@ const updateUser = async (req, res) => {
   }
 }
 
+//Delete User
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.body;
@@ -267,6 +272,49 @@ const deleteUser = async (req, res) => {
   }
 }
 
+//Get Single User Details
+const getUserDetails = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ where: { id: req.user.id } });
+    res.status(200).json({ success: true, user });
+  }
+  catch (error) {
+    errorMiddleware(error, req, res, next);
+  }
+}
+
+//Update Password
+const updatePassword = async (req, res, next) => {
+  try {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const user = await User.findOne({ where: { id: req.user.id } });
+    if (user) {
+
+      // Retrieve the hashed password from the database
+      const hashedPassword = user.password;
+      // const isPasswordMatched = await bcrypt.compare(oldPassword, hashedPassword);
+      const isPasswordMatched = oldPassword == hashedPassword;
+      if (!isPasswordMatched) {
+        return res.status(400).json({ message: "Old password is incorrect" });
+      }
+
+      if (newPassword !== confirmPassword) {
+        return res.status(400).json({ message: "Password does not match" });
+      }
+
+      user.password = newPassword
+      await user.save();
+
+      // Password reset successful
+      sendToken(user.email, "Password reset successful", 200, user, res);
+
+    }
+  }
+  catch (error) {
+    errorMiddleware(error, req, res, next);
+  }
+}
+
 
 
 
@@ -279,5 +327,7 @@ module.exports = {
   updateUser,
   deleteUser,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  getUserDetails,
+  updatePassword
 }

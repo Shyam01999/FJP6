@@ -13,5 +13,7 @@ authRouter.route('/update/user').post(isAuthenticated, authorizeRole("admin"), a
 authRouter.route('/delete/user').post(isAuthenticated, authorizeRole("admin"), authController.deleteUser);
 authRouter.route('/password/forgot').post(authController.forgotPassword);
 authRouter.route('/password/reset/:token').put(authController.resetPassword);
+authRouter.route('/me').get(isAuthenticated, authController.getUserDetails);
+authRouter.route('/password/update').put(isAuthenticated, authController.updatePassword); //after login
 
 module.exports = authRouter;
