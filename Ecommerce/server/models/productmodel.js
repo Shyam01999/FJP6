@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0,
         },
-        rating: {
+        ratings: {
             type: DataTypes.INTEGER,
             defaultValue: 0,
         },

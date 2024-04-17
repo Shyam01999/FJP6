@@ -14,6 +14,6 @@ authRouter.route('/delete/user').post(isAuthenticated, authorizeRole("admin"), a
 authRouter.route('/password/forgot').post(authController.forgotPassword);
 authRouter.route('/password/reset/:token').put(authController.resetPassword);
 authRouter.route('/me').get(isAuthenticated, authController.getUserDetails);
-authRouter.route('/password/update').put(isAuthenticated, authController.updatePassword); //after login
+authRouter.route('/password/update').put(isAuthenticated, authController.updatePassword); 
 
 module.exports = authRouter;

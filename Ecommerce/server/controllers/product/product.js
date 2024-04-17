@@ -6,8 +6,8 @@ const Product = db.Product;
 const createProduct = async (req, res) => {
     try {
         req.body.user = req.user.id;
-        let { name, description, price, rating, image, category, stock, numOfReviews, reviews, user} = req.body;
-        const newProduct = await Product.create({ name, description, price, rating, image, category, stock, numOfReviews, reviews, user });
+        let { name, description, price, ratings, image, category, stock, numOfReviews, reviews, user} = req.body;
+        const newProduct = await Product.create({ name, description, price, ratings, image, category, stock, numOfReviews, reviews, user });
         if (newProduct) {
             res.status(201).json({ message: "Product added Successfully" })
         }
@@ -45,7 +45,7 @@ const getAllProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const { name, description, price, rating, image, category, stock, numOfReviews, reviews } = req.body;
+        const { name, description, price, ratings, image, category, stock, numOfReviews, reviews } = req.body;
         let findProduct = await Product.findByPk(id);
 
         if (!findProduct) {
@@ -56,7 +56,7 @@ const updateProduct = async (req, res) => {
         findProduct.name = name || findProduct.name;
         findProduct.description = description || findProduct.description;
         findProduct.price = price || findProduct.price
-        findProduct.rating = rating || findProduct.rating
+        findProduct.ratings = ratings || findProduct.ratings
         findProduct.image = image || findProduct.image
         findProduct.category = category || findProduct.category
         findProduct.stock = stock || findProduct.stock
