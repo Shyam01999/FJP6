@@ -27,7 +27,8 @@ const productSchema = z.object({
     //     .number({ required_error: "" }),
     reviews: z
         .array(z.object(
-            {
+            {   
+                user: z.string({ required_error: "User is required" }).trim(),
                 name: z.string({ required_error: "Review name is required" }).trim(),
                 ratings: z.number({ required_error: "Review ratings is required" }),
                 comments: z.string({ required_error: "Review comment is required" }).trim()

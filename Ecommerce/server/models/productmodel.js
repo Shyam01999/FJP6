@@ -14,22 +14,9 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0,
         },
         ratings: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             defaultValue: 0,
         },
-        // image: [
-        //     {
-        //         public_id: {
-        //             type: DataTypes.STRING,
-        //             allowNull: false
-        //         },
-        //         url: {
-        //             type: DataTypes.STRING,
-        //             allowNull: false
-        //         }
-
-        //     }
-        // ],
         image: {
             type: DataTypes.JSON,
             allowNull: false

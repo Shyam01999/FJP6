@@ -10,8 +10,10 @@ productRouter.route('/updateproduct/:id').put(isAuthenticated, authorizeRole("ad
 productRouter.route('/deleteproduct/:id').delete(isAuthenticated, authorizeRole("admin"), productController.deleteProduct);
 productRouter.route('/allproducts').get(productController.getAllProduct);
 productRouter.route('/product/:id').get(productController.getProductDetails);
+productRouter.route('/review').put(isAuthenticated, productController.createReviewProduct);
+productRouter.route('/review/delete').delete(isAuthenticated, productController.deleteReviewProduct);
 
 
  
-
+ 
 module.exports = productRouter;

@@ -6,7 +6,7 @@ const Product = db.Product;
 const createProduct = async (req, res) => {
     try {
         req.body.user = req.user.id;
-        let { name, description, price, ratings, image, category, stock, numOfReviews, reviews, user} = req.body;
+        let { name, description, price, ratings, image, category, stock, numOfReviews, reviews, user } = req.body;
         const newProduct = await Product.create({ name, description, price, ratings, image, category, stock, numOfReviews, reviews, user });
         if (newProduct) {
             res.status(201).json({ message: "Product added Successfully" })
@@ -25,7 +25,7 @@ const createProduct = async (req, res) => {
 const getAllProduct = async (req, res) => {
     try {
         const resultPerPage = 5;
-        const productCount  = await Product.count();
+        const productCount = await Product.count();
         const apiFeature = new ApiFeatures(Product.findAll(), req.query).search().filter().pagination(resultPerPage);
         const allproducts = await apiFeature.query;
         if (allproducts.length > 0) {
@@ -114,6 +114,100 @@ const getProductDetails = async (req, res) => {
     }
 }
 
+//create review product
+const createReviewProduct = async (req, res) => {
+    try {
+        const { rating, comment, productId } = req.body;
+        const review = {
+            user: req.user.id,
+            name: req.user.username,
+            rating: Number(rating),
+            comment: comment
+        }
+
+        const product = await Product.findByPk(productId);
+
+        if (!product) {
+            return res.status(400).json({ message: `No Product found with id ${productId}.` });
+        }
+
+        const existingReviewIndex = product.reviews.findIndex(rev => rev.user.toString() === req.user.id.toString());
+
+        if (existingReviewIndex !== -1) {
+            // If user has already reviewed, update the existing review
+            product.reviews[existingReviewIndex].rating = rating;
+            product.reviews[existingReviewIndex].comment = comment;
+        } else {
+            // Otherwise, add a new review
+            product.reviews.push(review);
+        }
+
+        // Mark the 'reviews' field as modified
+        product.changed('reviews', true);
+
+        // Update number of reviews
+        product.numOfReviews = product.reviews.length;
+
+        // Update average rating
+        const totalRating = product.reviews.reduce((acc, curr) => acc + Number(curr.rating), 0);
+        product.ratings = totalRating / product.reviews.length;
+
+        // Save the changes to the product instance
+        await product.save();
+
+        res.status(201).json({ success: true, message: "Product Review added Successfully" });
+    } catch (error) {
+        console.log('Error in Review product:', error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+const deleteReviewProduct = async (req, res) => {
+    try {
+        const { productId} = req.body;
+        const reviewId = req.user.id;
+        // Find the product by ID
+        const product = await Product.findByPk(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: `Product with id ${productId} not found.` });
+        }
+
+        // Find the index of the review to delete
+        const reviewIndex = product.reviews.findIndex(review => review.user === parseInt(reviewId));
+
+        if (reviewIndex === -1) {
+            return res.status(404).json({ message: `Review with id ${reviewId} not found for product ${productId}.` });
+        }
+
+        // Remove the review from the product's reviews array
+        product.reviews.splice(reviewIndex, 1);
+        // product.reviews = product.reviews.filter((rev) => rev.user != parseInt(reviewId))
+        
+        // Mark the 'reviews' field as modified
+        product.changed('reviews', true);
+
+        // Update the number of reviews
+        product.numOfReviews = product.reviews.length;
+
+        // Calculate the new average rating
+        const totalRating = product.reviews.reduce((acc, curr) => acc + Number(curr.rating), 0);
+        product.ratings = totalRating / product.reviews.length || 0;
+
+        // Save the changes to the product
+        await product.save();
+
+        res.status(200).json({ success: true, message: "Review deleted successfully." });
+    } catch (error) {
+        console.log('Error deleting review:', error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
+
+
+
 
 
 module.exports = {
@@ -121,5 +215,7 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
-    getProductDetails
+    getProductDetails,
+    createReviewProduct,
+    deleteReviewProduct
 }
