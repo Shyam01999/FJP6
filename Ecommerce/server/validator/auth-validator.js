@@ -23,9 +23,18 @@ const registerSchema = z.object({
         .trim()
         .min(10, { message: 'Mobile Number must be at least of 10 characters.' })
         .max(20, { message: 'Mobile Number must not be more than 20 characters' }),
+    // avatar: z
+    //     .any(),
     role: z
         .string({ required_error: "" })
-        .trim()
+        .trim(),
+    // resetPasswordToken: z
+    //     .string({ required_error: "" }),
+    // resetPasswordToken: z
+    //     .string({ required_error: "" }),
+
+
+
 
 })
 

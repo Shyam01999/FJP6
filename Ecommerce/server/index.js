@@ -5,12 +5,15 @@ require('dotenv').config()
 const port = process.env.PORT;
 //const pool = require('./db');
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const authRouter = require('./router/auth-router/auth-router');
 const contactRouter = require("./router/contact-router/contact-router");
 const productRouter = require("./router/product-router/product-router");
 const errorMiddleware = require("./middleware/error-middleware");
 
+
 app.use(express.json()); //middleware
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors({

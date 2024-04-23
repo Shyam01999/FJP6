@@ -13,23 +13,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0,
         },
-        rating: {
-            type: DataTypes.INTEGER,
+        ratings: {
+            type: DataTypes.FLOAT,
             defaultValue: 0,
         },
-        // image: [
-        //     {
-        //         public_id: {
-        //             type: DataTypes.STRING,
-        //             allowNull: false
-        //         },
-        //         url: {
-        //             type: DataTypes.STRING,
-        //             allowNull: false
-        //         }
-
-        //     }
-        // ],
         image: {
             type: DataTypes.JSON,
             allowNull: false
@@ -72,7 +59,14 @@ module.exports = (sequelize, DataTypes) => {
         reviews: {
             type: DataTypes.JSON,
             allowNull: false
+        },
+
+        user:{
+            type:DataTypes.INTEGER,
+            allowNull:false
         }
+
+
     })
 
     return Product
