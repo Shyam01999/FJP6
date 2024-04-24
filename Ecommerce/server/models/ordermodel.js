@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         deliveredAt: { // Adjusted field name
             type: DataTypes.DATE
-        }
+        },
     })
     return Order;
 }

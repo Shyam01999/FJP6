@@ -4,6 +4,10 @@ const orderRouter = express.Router();
 const orderController = require("../../controllers/order/order");
 
 orderRouter.route('/new').post(isAuthenticated, orderController.newOrder);
+orderRouter.route('/single/:id').get(isAuthenticated, authorizeRole('admin'),orderController.getSingleOrder);
+orderRouter.route('/myorders').get(isAuthenticated, orderController.myOrderDetails);
+orderRouter.route('/delete/:id').delete(isAuthenticated, orderController.deleteOrder);
+
 // productRouter.route('/updateproduct/:id').put(isAuthenticated, authorizeRole("admin"), productController.updateProduct);
 // productRouter.route('/deleteproduct/:id').delete(isAuthenticated, authorizeRole("admin"), productController.deleteProduct);
 // productRouter.route('/allproducts').get(productController.getAllProduct);
