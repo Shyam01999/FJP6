@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const authRouter = require('./router/auth-router/auth-router');
 const contactRouter = require("./router/contact-router/contact-router");
 const productRouter = require("./router/product-router/product-router");
+const orderRouter = require("./router/order-router/order-router");
 const errorMiddleware = require("./middleware/error-middleware");
 
 
@@ -25,8 +26,9 @@ app.use(cors({
 
 //rest api end point
 app.use("/api/auth", authRouter);
-// app.use("/api/form", contactRouter);
 app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
+
 
 
 app.use(errorMiddleware)

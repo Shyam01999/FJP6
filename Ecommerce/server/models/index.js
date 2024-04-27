@@ -38,6 +38,11 @@ db.sequelize = sequelize
 
 db.User = require("./authmodel.js")(sequelize, DataTypes);
 db.Product = require("./productmodel.js")(sequelize, DataTypes);
+db.Order = require('./ordermodel.js')(sequelize, DataTypes);
+
+// Define associations if any
+db.User.hasMany(db.Order);
+db.Order.belongsTo(db.User);
 
 db.sequelize.sync({force: false})
 .then(()=>{
