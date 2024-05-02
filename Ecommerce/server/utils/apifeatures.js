@@ -1,6 +1,5 @@
 
-const db = require("../models/index");
-const Product = db.Product;
+const { Product } = require("../models");
 
 class ApiFeatures {
     constructor(query, queryStr) {

@@ -10,9 +10,9 @@ const sequelize = new Sequelize(
     port: dbConfig.port,
     dialect: dbConfig.dialect,
     logging: dbConfig.logging,
-    ssl:dbConfig.ssl,
-    dialectOptions : dbConfig.dialectOptions,
-    // operatorsAliases: false,
+    // ssl:dbConfig.ssl, //for ssl true case uncomment
+    // dialectOptions : dbConfig.dialectOptions, //for sslrequire true case uncomment
+    
 
     pool: {
         max: dbConfig.pool.max,
@@ -24,13 +24,13 @@ const sequelize = new Sequelize(
 )
 
 // Define an async function to authenticate the database connection
-sequelize.authenticate()
-.then(()=>{
-    console.log('Sequelize Database connected successfully.');
-})
-.catch(()=>{
-    console.error('Unable to connect to the database:', error);
-})
+// sequelize.authenticate()
+// .then(()=>{
+//     console.log('Sequelize Database connected successfully.');
+// })
+// .catch(()=>{
+//     console.error('Unable to connect to the database:', error);
+// })
 
 // Call the async function to authenticate the database connection
 
@@ -47,11 +47,12 @@ db.Order = require('./ordermodel.js')(sequelize, DataTypes);
 db.User.hasMany(db.Order);
 db.Order.belongsTo(db.User);
 
-db.sequelize.sync({force: false})
-.then(()=>{
-    console.log('Database sync Successfully!')
-})
+// db.sequelize.sync({force: false})
+// .then(()=>{
+//     console.log('Database sync Successfully!')
+// })
 
-module.exports = db
+module.exports = db;
+
 
 
