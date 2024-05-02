@@ -1,6 +1,5 @@
-const db = require("../../models/index");
+const { Product } = require("../../models");
 const ApiFeatures = require("../../utils/apifeatures");
-const Product = db.Product;
 
 //create product -- Admin
 const createProduct = async (req, res) => {
@@ -164,7 +163,7 @@ const createReviewProduct = async (req, res) => {
 
 const deleteReviewProduct = async (req, res) => {
     try {
-        const { productId} = req.body;
+        const { productId } = req.body;
         const reviewId = req.user.id;
         // Find the product by ID
         const product = await Product.findByPk(productId);
@@ -183,7 +182,7 @@ const deleteReviewProduct = async (req, res) => {
         // Remove the review from the product's reviews array
         product.reviews.splice(reviewIndex, 1);
         // product.reviews = product.reviews.filter((rev) => rev.user != parseInt(reviewId))
-        
+
         // Mark the 'reviews' field as modified
         product.changed('reviews', true);
 

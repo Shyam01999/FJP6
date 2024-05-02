@@ -1,6 +1,4 @@
-const db = require("../../models/index");
-const Order = db.Order;
-const Product = db.Product;
+const {Order, Product} = require("../../models");
 
 //new order
 const newOrder = async (req, res) => {
