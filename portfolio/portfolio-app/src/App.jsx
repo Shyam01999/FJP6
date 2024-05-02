@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import "./styles/layout.css";
@@ -27,7 +27,7 @@ function App() {
       <Projects />
       <Services />
       <Contact />
-      {/* <NotFound /> */}
+      <NotFound />
       <ToastContainer />
 
       {/* <BrowserRouter>
