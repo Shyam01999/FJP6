@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
 const sendToken = require('../../utils/sendToken');
-const db = require("../../models/index");
+const {User} = require("../../models");
 const errorMiddleware = require('../../middleware/error-middleware');
 const sendEmail = require('../../utils/sendEmail');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
 const { password } = require('../../config/dbConfig');
 
-const User = db.User;
+// const User = db.User;
 
 // // ****************************
 // //   Registration Controller

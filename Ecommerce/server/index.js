@@ -2,8 +2,9 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 require('dotenv').config()
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 //const pool = require('./db');
+const db = require("./models");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const authRouter = require('./router/auth-router/auth-router');
@@ -29,10 +30,16 @@ app.use("/api/auth", authRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
 
-
-
 app.use(errorMiddleware)
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
+db.sequelize
+  .sync({force: false})
+  .then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+        console.log("Database sync successfully");
+    })
+  })
+  .catch((err) => {
+    console.error("Error syncing database:", err);
+  });
