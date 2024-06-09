@@ -22,8 +22,8 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--bg-color);
-  color: var(--text-color);
+  background: var(--light-bg-color);
+  color: var(--light-color);
   /* display: flex;
   flex-direction: column;
   min-height: 100vh; */

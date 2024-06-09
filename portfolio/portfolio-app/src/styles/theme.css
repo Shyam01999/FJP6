@@ -1,10 +1,22 @@
 /* Theme Rule */
 :root {
-  --bg-color:#1f242d;
+  --light-bg-color: #fff;
+  --light-color: #1f2544;
+  --shadow-color: #3c3633;
+  --header-bg-color:#EEF7FF;
+  --brand-color:#1679AB;
+  --brand-logo-color:#074173;
+
+  --bg-color: #1f242d;
   --text-color: #fff;
-  --logo-color:#12D8FA;
-  --main-color: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+  --logo-color: #12d8fa;
+  --main-color: linear-gradient(
+    to right,
+    #1fa2ff 0%,
+    #12d8fa 51%,
+    #1fa2ff 100%
+  );
   --btn-color: #646cff;
-  --menu-color:#2AF598;
-  --fb-logo: #0866FF;
-  }
+  --menu-color: #2af598;
+  --fb-logo: #0866ff;
+}

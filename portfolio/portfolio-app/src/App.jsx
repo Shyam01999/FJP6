@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
+
 // import "react-toastify/dist/ReactToastify.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
@@ -20,29 +20,28 @@ import Services from "./pages/Services";
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header />
       <Home />
       <About />
       <Skills />
       <Projects />
       <Services />
       <Contact />
-      <NotFound />
-      <ToastContainer />
+      <NotFound /> */}
 
-      {/* <BrowserRouter>
-        <ToastContainer />
-        <Header/>
+      <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/skills" element={<Skills/>}/>
-          <Route path="/projects" element={<Projects/>}/>
-          <Route path="/services" element={<Services/>}/>
-          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }
