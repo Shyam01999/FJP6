@@ -27,6 +27,11 @@ a.active {
   transition: width 0.3s linear;
 }
 
+.navbar.dark li ::after {
+  background-color: var(--logo-color);
+  transition: width 0.3s linear;
+}
+
 .navbar li a:hover::after {
   width: 100%;
 }

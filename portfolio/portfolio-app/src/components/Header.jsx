@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { IoMoon } from "react-icons/io5";
+import { IoIosSunny } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { TOGGLE_THEME } from "../redux/actionTypes/theme.actionTypes";
 
 function Header() {
+  const theme = useSelector((state) => state.themeReducer.theme);
+  const dispatch = useDispatch();
   const routes = [
     {
       path: "/home",
@@ -28,28 +34,43 @@ function Header() {
       name: "Contact",
     },
   ];
+
+  const toggleTheme = () => {
+    dispatch({ type: TOGGLE_THEME });
+  };
   return (
     <>
-      <header id="header">
+      <header className={`header ${theme === "light" ? "light" : "dark"}`}>
         <div className="container section-header">
-          <div className="logo-brand">
+          <div className={`logo-brand ${theme === "light" ? "light" : "dark"}`}>
             <NavLink to="/">
               <h2>
                 Shyam <span>Sundar Sahoo</span>
               </h2>
             </NavLink>
           </div>
-          <nav>
-            <ul className="navbar">
-              {routes.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <NavLink to={item.path}>{item.name}</NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          <div className={`nav-container`}>
+            <nav>
+              <ul className={`navbar ${theme === "light" ? "light" : "dark"}`}>
+                {routes.map((item, index) => {
+                  return (
+                    <li key={index}>
+                      <NavLink to={item.path}>{item.name}</NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <div className={`mode-container ${theme === "light" ? "light" : "dark"}`}>
+              <span onClick={toggleTheme}>
+                {theme === "light" ? (
+                  <IoMoon />
+                ) : (
+                  <IoIosSunny/>
+                )}
+              </span>
+            </div>
+          </div>
         </div>
       </header>
     </>

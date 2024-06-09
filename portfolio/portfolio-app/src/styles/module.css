@@ -1,4 +1,16 @@
 /* module rule or reuseable component */
+.dark{
+  background-color: var(--dark-bg-color);
+  color: var(--light-bg-color);
+  transition: all 0.3s linear;
+}
+
+.light{
+  background-color: var(--light-bg-color);
+  color: var(--light-color);
+  transition: all 0.3s linear;
+}
+
 .container {
   max-width: 142rem;
   margin: 0 auto;

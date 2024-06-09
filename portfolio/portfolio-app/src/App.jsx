@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // import "react-toastify/dist/ReactToastify.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,8 +16,14 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import Services from "./pages/Services";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const theme = useSelector((state) => state.themeReducer.theme);
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
   return (
     <>
       {/* <Header />
