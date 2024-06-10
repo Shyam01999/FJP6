@@ -4,9 +4,13 @@ import { IoMoon } from "react-icons/io5";
 import { IoIosSunny } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_THEME } from "../redux/actionTypes/theme.actionTypes";
+import { LuMenu } from "react-icons/lu";
+import { RxCross2 } from "react-icons/rx";
 
 function Header() {
   const theme = useSelector((state) => state.themeReducer.theme);
+
+  const [menu, setMenu] = useState(false);
   const dispatch = useDispatch();
   const routes = [
     {
@@ -38,6 +42,10 @@ function Header() {
   const toggleTheme = () => {
     dispatch({ type: TOGGLE_THEME });
   };
+
+  const toggleMenu = () => {
+    setMenu(!menu);
+  };
   return (
     <>
       <header className={`header ${theme === "light" ? "light" : "dark"}`}>
@@ -61,13 +69,27 @@ function Header() {
                 })}
               </ul>
             </nav>
-            <div className={`mode-container ${theme === "light" ? "light" : "dark"}`}>
-              <span onClick={toggleTheme}>
-                {theme === "light" ? (
-                  <IoMoon />
-                ) : (
-                  <IoIosSunny/>
-                )}
+            <div
+              className={`mode-container ${
+                theme === "light" ? "light" : "dark"
+              }`}
+            >
+              <span className="menu-icon" onClick={toggleMenu}>
+                <LuMenu />
+              </span>
+              {menu && (
+                <div
+                  className={`menu-container ${
+                    theme === "light" ? "light" : "dark"
+                  }`}
+                >
+                  <span className="cross-icon" onClick={toggleMenu}>
+                    <RxCross2 />
+                  </span>
+                </div>
+              )}
+              <span onClick={toggleTheme} className="sun-icon">
+                {theme === "light" ? <IoMoon /> : <IoIosSunny />}
               </span>
             </div>
           </div>

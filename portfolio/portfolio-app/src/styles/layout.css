@@ -3,6 +3,7 @@
 .header {
   background: var(--header-bg-color);
   box-shadow: 0px 0px 2.5px 0px var(--shadow-color);
+  position: relative;
 }
 
 .header.dark{
@@ -89,13 +90,15 @@
 }
 
 .mode-container {
+  display: flex;
+  gap: 1rem;
   font-size: 2rem;
   margin-top: 0.3rem;
   cursor: pointer;
   transition: all 0.3s linear;
 }
 
-.mode-container.dark{
+.mode-container.dark .sun-icon{
   color: var(--lightmode-icon-color);
 }
 

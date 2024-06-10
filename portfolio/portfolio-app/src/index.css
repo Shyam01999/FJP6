@@ -17,7 +17,6 @@
 /* Base Rule */
 html {
   font-size: 62.5%; /*1rem = 10px */
-  overflow: hidden;
 }
 
 body {
@@ -87,3 +86,4 @@ footer {
   font-weight: 500;
   /* width: 100%; */
 }
+
